@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="Settings">
+
+    <ge.altasoft.gia.ag.views.FriendlyEditTextPreference
+        android:key="mtqq_url_local"
+        android:summary="%s"
+        android:title="MTQQ Broker local Url" />
+
+    <ge.altasoft.gia.ag.views.FriendlyEditTextPreference
+        android:key="mtqq_url_global"
+        android:summary="%s"
+        android:title="MTQQ Broker global Url" />
+</PreferenceScreen>
+
