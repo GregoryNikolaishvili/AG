@@ -220,5 +220,4 @@ public abstract class ChaWidget extends LinearLayout {
             }
         }
     }
-
 }

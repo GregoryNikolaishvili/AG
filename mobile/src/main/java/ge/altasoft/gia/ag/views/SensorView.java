@@ -18,16 +18,12 @@ public class SensorView extends ChaWidget {
 
 //    private enum ButtonState {UNKNOWN, ON, OFF, WAIT}
 
-    private TextView tvSensorName;
-    private TextView tvPercent;
-    private TextView tvDistance;
-    private TextView tvBallValve;
-    private TextView tvBallValveSwitch;
-    //private ImageView ivLight;
+    protected TextView tvSensorName;
+    protected TextView tvValue;
 
-    private int defaultTextColor;
+    protected int defaultTextColor;
 
-    private SensorData value;
+    protected SensorData value;
 
 //    private ButtonState buttonState = ButtonState.UNKNOWN;
 
@@ -44,6 +40,10 @@ public class SensorView extends ChaWidget {
     public SensorView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initializeViews(context);
+    }
+
+    protected int getLayoutId() {
+        return R.layout.sensor_view_layout;
     }
 
     @Override
@@ -74,19 +74,13 @@ public class SensorView extends ChaWidget {
 
     private void initializeViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.waterlevel_sensor_layout, this);
+        inflater.inflate(getLayoutId(), this);
 
         afterInflate();
 
         tvSensorName = (TextView) this.findViewById(R.id.sensor_name);
-        tvPercent = (TextView) this.findViewById(R.id.water_percent_value);
-        defaultTextColor = tvPercent.getCurrentTextColor();
-
-        tvDistance = (TextView) this.findViewById(R.id.distance_cm);
-        tvBallValve = (TextView) this.findViewById(R.id.ball_valve_state);
-        tvBallValveSwitch = (TextView) this.findViewById(R.id.ball_valve_switch_state);
-
-        //ivLight = ((ImageView) findViewById(R.id.relay_light));
+        tvValue = (TextView) this.findViewById(R.id.sensor_value);
+        defaultTextColor = tvValue.getCurrentTextColor();
     }
 
     public void setValue(SensorData value) {
@@ -98,43 +92,13 @@ public class SensorView extends ChaWidget {
     public void refresh() {
         tvSensorName.setText(value.getName());
 
-        //todo
-        int x = value.getState();
-        if (x == 255)
-            tvPercent.setText("- - - - %");
-        else
-            tvPercent.setText(String.format(Locale.US, "%d %%", x));
+        Integer x = value.getState();
+        tvValue.setText(x.toString());
 
 //        if (this.waterLevelData.getFloatSwitchIsOn())
-//            tvPercent.setTextColor(Color.CYAN);
+//            tvValue.setTextColor(Color.CYAN);
 //        else
-            tvPercent.setTextColor(defaultTextColor);
-
-//        x = this.waterLevelData.getWaterDistance();
-//        if (x == Utils.I_UNDEFINED)
-//            tvDistance.setText("- - cm");
-//        else
-//            tvDistance.setText(String.format(Locale.US, "%d cm", x));
-//
-//        int state = this.waterLevelData.getBallValveState();
-//
-//        tvBallValve.setText(Utils.GetBallValveStateText(state));
-//        tvBallValve.setTextColor(Utils.GetBallValveStateColor(state));
-
-//        char sstate = this.waterLevelData.getBallValveSwitchState();
-//        String text = "";
-//        switch (sstate) {
-//            case 'O':
-//                text = "Open";
-//                break;
-//            case 'C':
-//                text = "Closed";
-//                break;
-//            case 'B':
-//                text = "Open/Closed";
-//                break;
-//        }
-//        tvBallValveSwitch.setText(text);
+        tvValue.setTextColor(defaultTextColor);
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE, -2);

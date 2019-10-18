@@ -9,7 +9,18 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import ge.altasoft.gia.ag.views.DeviceView;
+import ge.altasoft.gia.ag.views.FanView;
+import ge.altasoft.gia.ag.views.FilterView;
+import ge.altasoft.gia.ag.views.FishView;
+import ge.altasoft.gia.ag.views.HeaterView;
+import ge.altasoft.gia.ag.views.LightView;
+import ge.altasoft.gia.ag.views.PercentView;
+import ge.altasoft.gia.ag.views.PumpView;
+import ge.altasoft.gia.ag.views.RelayView;
 import ge.altasoft.gia.ag.views.SensorView;
+import ge.altasoft.gia.ag.views.TemperatureView;
+import ge.altasoft.gia.ag.views.WaterView;
+import ge.altasoft.gia.ag.views.YesNoView;
 
 public class AquaControllerData {
 
@@ -29,7 +40,7 @@ public class AquaControllerData {
     // 2nd board
     final static int DEVICE_O2 = 8;
     final static int DEVICE_CO2 = 9;
-    final static int DEVICE_CO2_PUMP = 10;
+    final static int DEVICE_AQUA_RECIRCULATE_PUMP = 10;
     final static int DEVICE_WATER_DRAIN_PUMP = 11;
     final static int DEVICE_DEVICE_220_A = 12;
     final static int DEVICE_DEVICE_220_B = 13;
@@ -208,12 +219,12 @@ public class AquaControllerData {
                 return "Feeder 1";
             case DEVICE_FEEDER_2:
                 return "Feeder 2";
-            case O2:
+            case DEVICE_O2:
                 return "O2";
-            case CO2:
+            case DEVICE_CO2:
                 return "CO2";
-            case DEVICE_CO2_PUMP:
-                return "CO2 pump";
+            case DEVICE_AQUA_RECIRCULATE_PUMP:
+                return "Aqua pump";
             case DEVICE_WATER_DRAIN_PUMP:
                 return "Water drain pump";
             case DEVICE_DEVICE_220_A:
@@ -263,16 +274,46 @@ public class AquaControllerData {
         DeviceView w;
 
         switch (position) {
+            case DEVICE_LIGHT_1:
+            case DEVICE_LIGHT_2:
+            case DEVICE_LIGHT_3:
+            case DEVICE_LIGHT_4:
+            case DEVICE_LIGHT_5:
+            case DEVICE_HOSPITAL_LIGHT:
+            case DEVICE_MOON_LIGHT:
+            case DEVICE_UV_LIGHT:
+                w = new LightView(context, fromDashboard);
+                break;
+            case DEVICE_FILTER_1:
+            case DEVICE_FILTER_2:
+                w = new FilterView(context, fromDashboard);
+                break;
+            case DEVICE_HEATER:
+            case DEVICE_HOSPITAL_HEATER:
+            case DEVICE_SUMP_HEATER:
+                w = new HeaterView(context, fromDashboard);
+                break;
+            case DEVICE_BOARD_FAN:
             case DEVICE_EXHAUST_FAN:
+                w = new FanView(context, fromDashboard);
+                break;
+            case DEVICE_SOLENOID:
+                w = new WaterView(context, fromDashboard);
+                break;
             case DEVICE_FEEDER_1:
             case DEVICE_FEEDER_2:
-            case O2:
-            case CO2:
-            case DEVICE_CO2_PUMP:
-                w = new DeviceView(context, fromDashboard);
+                w = new FishView(context, fromDashboard);
+                break;
+            case DEVICE_AQUA_RECIRCULATE_PUMP:
+            case DEVICE_SUMP_RECIRCULATE_PUMP:
+            case DEVICE_WATER_DRAIN_PUMP:
+            case DEVICE_WATER_FILL_PUMP:
+            case DEVICE_DOSING_PUMP_MACRO:
+            case DEVICE_DOSING_PUMP_MICRO:
+                w = new PumpView(context, fromDashboard);
                 break;
             default:
-                w = new DeviceView(context, fromDashboard);
+                w = new RelayView(context, fromDashboard);
                 break;
         }
 
@@ -324,7 +365,41 @@ public class AquaControllerData {
     }
 
     public SensorView createSensorWidget(Context context, int position, boolean fromDashboard) {
-        SensorView w = new SensorView(context, fromDashboard);
+        SensorView w;
+        switch (position) {
+
+            case SENSOR_T_AQUARIUM_1:
+            case SENSOR_T_AQUARIUM_2:
+            case SENSOR_T_AQUARIUM_3:
+            case SENSOR_T_SUMP:
+            case SENSOR_T_HOSPITAL:
+            case SENSOR_T_ROOM:
+            case SENSOR_T_BOARD:
+                w = new TemperatureView(context, fromDashboard);
+                break;
+
+            case SENSOR_WL_SUMP:
+            case SENSOR_H_ROOM:
+                w = new PercentView(context, fromDashboard);
+                break;
+
+            case SENSOR_WL_SUMP_MM:
+            case SENSOR_RPM_BOARD_FAN:
+                w = new SensorView(context, fromDashboard);
+                break;
+                
+            case SENSOR_AQUA_WATER_HIGH:
+            case SENSOR_SUMP_WATER_HIGH:
+            case SENSOR_SUMP_WATER_LOW:
+            case SENSOR_HOSPITAL_WATER_LOW:
+            case SENSOR_WATER_IS_ON_FLOOR_1:
+            case SENSOR_WATER_IS_ON_FLOOR_2:
+                w = new YesNoView(context, fromDashboard);
+                break;
+            default:
+                w = new SensorView(context, fromDashboard);
+        }
+
         w.setValue(getSensorValue(position));
         return w;
     }

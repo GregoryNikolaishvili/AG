@@ -14,16 +14,16 @@ import ge.altasoft.gia.ag.classes.ChaWidget;
 import ge.altasoft.gia.ag.classes.DeviceData;
 import ge.altasoft.gia.ag.classes.WidgetType;
 
-public class DeviceView extends ChaWidget {
+public abstract class DeviceView extends ChaWidget {
 
-    private enum ButtonState {UNKNOWN, ON, OFF, WAIT}
+    protected enum ButtonState {UNKNOWN, ON, OFF, WAIT}
 
-    private ButtonState buttonState = ButtonState.UNKNOWN;
+    protected ButtonState buttonState = ButtonState.UNKNOWN;
 
-    private DeviceData value;
+    protected DeviceData value;
 
-    private TextView tvRelayName;
-    private ImageView ivLight;
+    protected TextView tvDeviceName;
+    protected ImageView ivPicture;
 
     public DeviceView(Context context, boolean fromDashboard) {
         super(context, fromDashboard);
@@ -66,31 +66,33 @@ public class DeviceView extends ChaWidget {
         setState(ButtonState.WAIT);
     }
 
-    private void initializeViews(Context context) {
+    protected abstract int getLayoutId();
+
+    protected void initializeViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.light_relay_layout, this);
+        inflater.inflate(getLayoutId(), this);
 
         afterInflate();
 
-        tvRelayName = ((TextView) this.findViewById(R.id.relay_name));
-        ivLight = ((ImageView) findViewById(R.id.relay_light));
+        tvDeviceName = ((TextView) this.findViewById(R.id.device_name));
+        ivPicture = ((ImageView) findViewById(R.id.relay_light));
     }
 
-    private void setState(ButtonState value) {
-        buttonState = value;
+    protected void setState(ButtonState state) {
+        buttonState = state;
 
-        switch (value) {
+        switch (state) {
             case UNKNOWN:
-                ivLight.setImageResource(R.drawable.button_onoff_indicator_unknown);
+                ivPicture.setImageResource(R.drawable.button_onoff_indicator_unknown);
                 break;
             case ON:
-                ivLight.setImageResource(R.drawable.button_onoff_indicator_on);
+                ivPicture.setImageResource(R.drawable.button_onoff_indicator_on);
                 break;
             case OFF:
-                ivLight.setImageResource(R.drawable.button_onoff_indicator_off);
+                ivPicture.setImageResource(R.drawable.button_onoff_indicator_off);
                 break;
             case WAIT:
-                ivLight.setImageResource(R.drawable.button_onoff_indicator_wait);
+                ivPicture.setImageResource(R.drawable.button_onoff_indicator_wait);
                 break;
         }
     }
@@ -102,7 +104,7 @@ public class DeviceView extends ChaWidget {
 
     @Override
     public void refresh() {
-        tvRelayName.setText(this.value.getName());
+        tvDeviceName.setText(this.value.getName());
         setState(this.value.getState() != 0 ? ButtonState.ON : ButtonState.OFF);
     }
 
