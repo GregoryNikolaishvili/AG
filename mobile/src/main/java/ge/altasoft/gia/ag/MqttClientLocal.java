@@ -377,7 +377,8 @@ public class MqttClientLocal {
 
                 if (topic.startsWith(TOPIC_AQUAGOD_DEVICE_STATE)) {
                     int id = Integer.parseInt(topic.substring(TOPIC_AQUAGOD_DEVICE_STATE.length()), 16);
-                    AquaControllerData.Instance.getDeviceValue(id).decodeState(payload);
+
+                    AquaControllerData.Instance.DecodeDeviceState(id, payload);
 
                     broadcastDataIntent.putExtra(MQTT_DATA_TYPE, MQTTReceivedDataType.AquagodDeviceState);
                     broadcastDataIntent.putExtra("id", id);
@@ -385,9 +386,6 @@ public class MqttClientLocal {
 
                     return;
                 }
-
-
-
 
                 ////////////////////
 

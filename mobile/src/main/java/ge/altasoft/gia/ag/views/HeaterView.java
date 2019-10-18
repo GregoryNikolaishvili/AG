@@ -44,12 +44,13 @@ public class HeaterView extends DeviceView {
                 break;
         }
 
-        tvDeviceName.setText(tvDeviceName.getText() + "\n" + Integer.toString(value.getState()) + " %");
+
     }
 
-//    @Override
-//    protected boolean canClick() {
-//        return true;
-//    }
+    @Override
+    public void refresh() {
+        super.refresh();
 
+        tvDeviceName.setText(tvDeviceName.getText() + "\n" + Integer.toString(value.getState()) + " %");
+    }
 }

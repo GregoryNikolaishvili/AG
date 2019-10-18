@@ -3,11 +3,14 @@ package ge.altasoft.gia.ag.views;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import java.util.Locale;
+
+import ge.altasoft.gia.ag.ChaActivity;
 import ge.altasoft.gia.ag.R;
 
 public class FanView extends DeviceView {
 
-       public FanView(Context context, boolean fromDashboard) {
+    public FanView(Context context, boolean fromDashboard) {
         super(context, fromDashboard);
     }
 
@@ -20,9 +23,17 @@ public class FanView extends DeviceView {
     }
 
     @Override
-    protected int getLayoutId()
-    {
+    protected int getLayoutId() {
         return R.layout.fan_view_layout;
+    }
+
+    @Override
+    protected void onClick() {
+        int newState = value.getState() + 10;
+        if (newState > 100)
+            newState = 0;
+        ((ChaActivity) getContext()).publish(String.format(Locale.US, "aquagodc/state/%02X", value.getId()), String.format(Locale.US, "%04X", newState), false);
+        setState(ButtonState.WAIT);
     }
 
     @Override
@@ -43,6 +54,14 @@ public class FanView extends DeviceView {
                 ivPicture.setImageResource(R.drawable.fan_indicator_wait);
                 break;
         }
+    }
+
+    @Override
+    public void refresh() {
+        super.refresh();
+
+        if (value.getState() > 0)
+            tvDeviceName.setText(tvDeviceName.getText() + "\n" + Integer.toString(value.getState()) + " %");
     }
 
 //    @Override

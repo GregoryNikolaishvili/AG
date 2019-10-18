@@ -44,14 +44,13 @@ public class PumpView extends DeviceView {
                 ivPicture.setImageResource(R.drawable.pump_indicator_wait);
                 break;
         }
+    }
+
+    @Override
+    public void refresh() {
+        super.refresh();
 
         if (value.getState() > 1)
             tvDeviceName.setText(tvDeviceName.getText() + "\n" + Integer.toString(value.getState()));
     }
-
-//    @Override
-//    protected boolean canClick() {
-//        return true;
-//    }
-
 }

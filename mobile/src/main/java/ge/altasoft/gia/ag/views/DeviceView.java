@@ -62,7 +62,7 @@ public abstract class DeviceView extends ChaWidget {
 
     @Override
     protected void onClick() {
-        ((ChaActivity) getContext()).publish(String.format(Locale.US, "aquagodc/state/%01X", value.getId()), buttonState == ButtonState.OFF ? "1" : "0", false);
+        ((ChaActivity) getContext()).publish(String.format(Locale.US, "aquagodc/state/%02X", value.getId()), buttonState == ButtonState.OFF ? "0001" : "0000", false);
         setState(ButtonState.WAIT);
     }
 

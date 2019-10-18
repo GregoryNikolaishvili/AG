@@ -56,28 +56,11 @@ public class DeviceData implements Comparable<DeviceData> {
         this.order = order;
     }
 
-    void decodeOrderAndName(String s) {
-        order = Character.digit(s.charAt(0), 16);
-        name = Utils.decodeArduinoString(s.substring(1));
-        if (name.equals(""))
-            name = "Relay #" + order;
-    }
-
     public void encodeSettings(StringBuilder sb) {
     }
 
     public int decodeSettings(String response, int idx) {
         return idx;
-    }
-
-    void encodeOrderAndName(StringBuilder sb2) {
-        sb2.append(String.format(Locale.US, "%01X", order));
-        sb2.append(Utils.encodeArduinoString(name));
-        sb2.append(';');
-    }
-
-    public void decodeState(String payload) {
-        setState(Integer.parseInt(payload));
     }
 
     @Override

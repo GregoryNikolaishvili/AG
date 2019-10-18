@@ -29,6 +29,7 @@ public class PercentView extends SensorView {
 
     @Override
     public void refresh() {
+
         tvSensorName.setText(value.getName());
 
         int x = value.getState();
