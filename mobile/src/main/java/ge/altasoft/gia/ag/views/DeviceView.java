@@ -11,31 +11,31 @@ import java.util.Locale;
 import ge.altasoft.gia.ag.ChaActivity;
 import ge.altasoft.gia.ag.R;
 import ge.altasoft.gia.ag.classes.ChaWidget;
+import ge.altasoft.gia.ag.classes.DeviceData;
 import ge.altasoft.gia.ag.classes.WidgetType;
-import ge.altasoft.gia.ag.light.LightRelayData;
 
-public class LightRelayView extends ChaWidget {
+public class DeviceView extends ChaWidget {
 
     private enum ButtonState {UNKNOWN, ON, OFF, WAIT}
 
     private ButtonState buttonState = ButtonState.UNKNOWN;
 
-    private LightRelayData relayData;
+    private DeviceData value;
 
     private TextView tvRelayName;
     private ImageView ivLight;
 
-    public LightRelayView(Context context, boolean fromDashboard) {
+    public DeviceView(Context context, boolean fromDashboard) {
         super(context, fromDashboard);
         initializeViews(context);
     }
 
-    public LightRelayView(Context context, AttributeSet attrs) {
+    public DeviceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initializeViews(context);
     }
 
-    public LightRelayView(Context context, AttributeSet attrs, int defStyle) {
+    public DeviceView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initializeViews(context);
     }
@@ -47,22 +47,22 @@ public class LightRelayView extends ChaWidget {
 
     @Override
     public WidgetType getWidgetType() {
-        return WidgetType.LightRelay;
+        return WidgetType.Device;
     }
 
     @Override
     public int getWidgetId() {
-        return relayData.getId();
+        return value.getId();
     }
 
     @Override
     protected int getPopupMenuResId() {
-        return R.menu.relay_popup_menu;
+        return R.menu.device_popup_menu;
     }
 
     @Override
     protected void onClick() {
-        ((ChaActivity) getContext()).publish(String.format(Locale.US, "chac/lc/state/%01X", relayData.getId()), buttonState == ButtonState.OFF ? "1" : "0", false);
+        ((ChaActivity) getContext()).publish(String.format(Locale.US, "aquagodc/state/%01X", value.getId()), buttonState == ButtonState.OFF ? "1" : "0", false);
         setState(ButtonState.WAIT);
     }
 
@@ -95,19 +95,15 @@ public class LightRelayView extends ChaWidget {
         }
     }
 
-//    public LightRelayData getRelayData() {
-//        return this.relayData;
-//    }
-
-    public void setRelayData(LightRelayData value) {
-        this.relayData = value;
+    public void setValue(DeviceData value) {
+        this.value = value;
         refresh();
     }
 
     @Override
     public void refresh() {
-        tvRelayName.setText(this.relayData.getName()); // + ", order=" + String.valueOf(value.getOrder()));
-        setState(this.relayData.getState() != 0 ? ButtonState.ON : ButtonState.OFF);
+        tvRelayName.setText(this.value.getName());
+        setState(this.value.getState() != 0 ? ButtonState.ON : ButtonState.OFF);
     }
 
     @Override

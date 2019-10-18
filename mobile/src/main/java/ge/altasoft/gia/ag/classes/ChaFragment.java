@@ -35,8 +35,6 @@ public abstract class ChaFragment extends Fragment implements OnStartDragListene
 
     public abstract void rebuildUI(boolean isStart);
 
-    public abstract void checkSensors();
-
     public abstract void saveWidgetOrders();
 
     @Override
@@ -116,6 +114,15 @@ public abstract class ChaFragment extends Fragment implements OnStartDragListene
         }
     }
 
+    public void refreshWidgets() {
+        if (rootView != null) {
+            for (int i = 0; i < recyclerView.getChildCount(); i++) {
+                ChaWidget w = getWidgetAt(recyclerView, i);
+                if (w != null)
+                    w.refresh();
+            }
+        }
+    }
     protected ChaWidget getWidgetAt(RecyclerView recyclerView, int position) {
         if (recyclerView != null) {
             View v = recyclerView.getChildAt(position);

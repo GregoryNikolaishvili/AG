@@ -14,13 +14,13 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Map;
 
+import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.classes.ChaFragment;
 import ge.altasoft.gia.ag.classes.ChaWidget;
 import ge.altasoft.gia.ag.classes.DashboardItems;
 import ge.altasoft.gia.ag.classes.ItemViewHolder;
 import ge.altasoft.gia.ag.classes.OnStartDragListener;
 import ge.altasoft.gia.ag.classes.WidgetType;
-import ge.altasoft.gia.ag.other.AquaControllerData;
 
 public class FragmentDashboard extends ChaFragment implements OnStartDragListener {
 
@@ -55,10 +55,10 @@ public class FragmentDashboard extends ChaFragment implements OnStartDragListene
 
     @Override
     public void rebuildUI(boolean isStart) {
-        if (rootView == null) return;
-
-        if ((AquaControllerData.Instance == null) || !AquaControllerData.Instance.haveSettings())
+        if (rootView == null)
             return;
+//        if (!AquaControllerData.Instance.haveSettings())
+//            return;
 
         hideWaitingScreen();
 
@@ -70,20 +70,6 @@ public class FragmentDashboard extends ChaFragment implements OnStartDragListene
 
         //drawFooter();
     }
-
-    @Override
-    public void checkSensors() {
-        if (rootView != null) {
-            for (int i = 0; i < recyclerView.getChildCount(); i++) {
-                ChaWidget w = getWidgetAt(recyclerView, i);
-                if (w != null)
-                    w.refresh();
-            }
-        }
-    }
-
-//    private void drawFooter() {
-//    }
 
     public void drawWidgetState(WidgetType wt, int widgetId) {
         if (rootView == null)

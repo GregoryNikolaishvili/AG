@@ -17,6 +17,7 @@ import android.widget.BaseAdapter;
 import ge.altasoft.gia.ag.ChaPreferenceActivity;
 import ge.altasoft.gia.ag.R;
 import ge.altasoft.gia.ag.Utils;
+import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.views.FriendlyEditTextPreference;
 import ge.altasoft.gia.ag.views.TimePreference;
 
@@ -28,7 +29,7 @@ public class LightSettingsActivity extends ChaPreferenceActivity {
         //getActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        LightControllerData.Instance.saveToPreferences(prefs);
+        //AquaControllerData.Instance.saveToPreferences(prefs);
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new PrefsFragment()).commit();
     }
@@ -43,7 +44,8 @@ public class LightSettingsActivity extends ChaPreferenceActivity {
                         public void run() {
                             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-                            LightControllerData.Instance.decode(prefs);
+                            //todo
+                            //AquaControllerData.Instance.decode(prefs);
 
                             setResult(Activity.RESULT_OK, null); //The data you want to send back
                             context.finish();
@@ -76,7 +78,7 @@ public class LightSettingsActivity extends ChaPreferenceActivity {
 
                 // Create the Preferences Manually - so that the key can be refresh programatically.
 
-                for (int id = 0; id < LightControllerData.RELAY_COUNT; id++) {
+                for (int id = 0; id < AquaControllerData.DEVICE_COUNT; id++) {
                     PreferenceScreen screen = prefMan.createPreferenceScreen(prefContext);
 
                     screen.setTitle(Integer.toString(id));
@@ -162,7 +164,7 @@ public class LightSettingsActivity extends ChaPreferenceActivity {
 
                         String name = namePref.getText();
                         if (name == null)
-                            name = "Relay #" + LightControllerData.Instance.relays(i).getId();
+                            name = "Device #" + AquaControllerData.Instance.getDeviceValue(i).getId();
                         screen.setTitle(name);
 
                         if (isActivePref.isChecked()) {

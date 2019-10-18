@@ -16,8 +16,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-import ge.altasoft.gia.ag.other.AquaControllerData;
-import ge.altasoft.gia.ag.other.WaterLevelData;
+import ge.altasoft.gia.ag.classes.AquaControllerData;
 
 
 public class MqttClientLocal {
@@ -32,10 +31,9 @@ public class MqttClientLocal {
     private static final String TOPIC_AQUAGOD_CONTROLLER_STATE = "aquagod/state";
 
     private static final String TOPIC_AQUAGOD_SENSOR_STATE = "aquagod/sensor/"; // last "/" is important
-    private static final String TOPIC_AQUAGOD_RELAY_STATE = "aquagod/device/"; // last "/" is important
+    private static final String TOPIC_AQUAGOD_DEVICE_STATE = "aquagod/device/"; // last "/" is important
 
     private static final String TOPIC_AQUAGOD_SETTINGS = "aquagod/settings";
-    private static final String TOPIC_AQUAGOD_NAMES_AND_ORDER = "aquagod/names";
 
     static final String MQTT_DATA_TYPE = "ge.altasoft.gia.ag.DATA_TYPE";
 
@@ -361,12 +359,6 @@ public class MqttClientLocal {
                         context.sendBroadcast(broadcastDataIntent);
                         return;
 
-                    case TOPIC_AQUAGOD_NAMES_AND_ORDER:
-                        AquaControllerData.Instance.decodeNamesAndOrder(payload);
-
-                        broadcastDataIntent.putExtra(MQTT_DATA_TYPE, MQTTReceivedDataType.AquagodNameAndOrders);
-                        context.sendBroadcast(broadcastDataIntent);
-                        return;
                     //endregion
 
                 }
@@ -374,7 +366,7 @@ public class MqttClientLocal {
                 if (topic.startsWith(TOPIC_AQUAGOD_SENSOR_STATE)) {
                     int id = Integer.parseInt(topic.substring(TOPIC_AQUAGOD_SENSOR_STATE.length()), 16);
 
-                    AquaControllerData.Instance.DecodeState(id, payload);
+                    AquaControllerData.Instance.DecodeSensorState(id, payload);
 
                     broadcastDataIntent.putExtra(MQTT_DATA_TYPE, MQTTReceivedDataType.AquagodSensorState);
                     broadcastDataIntent.putExtra("id", id);
@@ -383,9 +375,9 @@ public class MqttClientLocal {
                 }
 
 
-                if (topic.startsWith(TOPIC_AQUAGOD_RELAY_STATE)) {
-                    int id = Integer.parseInt(topic.substring(TOPIC_AQUAGOD_RELAY_STATE.length()), 16);
-                    AquaControllerData.Instance.relays(id).decodeState(payload);
+                if (topic.startsWith(TOPIC_AQUAGOD_DEVICE_STATE)) {
+                    int id = Integer.parseInt(topic.substring(TOPIC_AQUAGOD_DEVICE_STATE.length()), 16);
+                    AquaControllerData.Instance.getDeviceValue(id).decodeState(payload);
 
                     broadcastDataIntent.putExtra(MQTT_DATA_TYPE, MQTTReceivedDataType.AquagodDeviceState);
                     broadcastDataIntent.putExtra("id", id);

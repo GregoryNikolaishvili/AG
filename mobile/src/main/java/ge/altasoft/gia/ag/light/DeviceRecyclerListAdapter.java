@@ -1,4 +1,4 @@
-package ge.altasoft.gia.ag.other;
+package ge.altasoft.gia.ag.light;
 
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
@@ -7,13 +7,14 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.classes.ChaWidget;
 import ge.altasoft.gia.ag.classes.ItemTouchHelperAdapter;
 import ge.altasoft.gia.ag.classes.ItemViewHolder;
 
-public class OtherSensorRecyclerListAdapter extends RecyclerView.Adapter<ItemViewHolder> implements ItemTouchHelperAdapter {
+public class DeviceRecyclerListAdapter extends RecyclerView.Adapter<ItemViewHolder> implements ItemTouchHelperAdapter {
 
-    public OtherSensorRecyclerListAdapter() {
+    public DeviceRecyclerListAdapter() {
     }
 
     @Override
@@ -34,7 +35,7 @@ public class OtherSensorRecyclerListAdapter extends RecyclerView.Adapter<ItemVie
         if (ll.getChildCount() > 0)
             ll.removeAllViews();
 
-        ChaWidget w = AquaControllerData.Instance.createWidget(ll.getContext(), position, false);
+        ChaWidget w = AquaControllerData.Instance.createDeviceWidget(ll.getContext(), position, false);
         if (w != null) {
             int height = ViewCompat.getMinimumHeight(ll);
             w.setMinimumHeight(height);
@@ -59,7 +60,7 @@ public class OtherSensorRecyclerListAdapter extends RecyclerView.Adapter<ItemVie
 
     @Override
     public int getItemCount() {
-        return AquaControllerData.Instance.sensorCount();
+        return AquaControllerData.DEVICE_COUNT;
     }
 
 }

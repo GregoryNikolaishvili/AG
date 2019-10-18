@@ -1,7 +1,6 @@
 package ge.altasoft.gia.ag.views;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.TextView;
@@ -12,6 +11,7 @@ import java.util.Locale;
 import ge.altasoft.gia.ag.R;
 import ge.altasoft.gia.ag.Utils;
 import ge.altasoft.gia.ag.classes.ChaWidget;
+import ge.altasoft.gia.ag.classes.SensorData;
 import ge.altasoft.gia.ag.classes.WidgetType;
 
 public class SensorView extends ChaWidget {
@@ -27,8 +27,7 @@ public class SensorView extends ChaWidget {
 
     private int defaultTextColor;
 
-    private int value;
-    private int Id;
+    private SensorData value;
 
 //    private ButtonState buttonState = ButtonState.UNKNOWN;
 
@@ -59,17 +58,17 @@ public class SensorView extends ChaWidget {
 
     @Override
     public WidgetType getWidgetType() {
-        return WidgetType.WaterLevelSensor;
+        return WidgetType.Sensor;
     }
 
     @Override
     public int getWidgetId() {
-        return Id;
+        return value.getId();
     }
 
     @Override
     protected int getPopupMenuResId() {
-        return R.menu._5in1_sensor_popup_menu;
+        return R.menu.sensor_popup_menu;
     }
 
 
@@ -90,17 +89,17 @@ public class SensorView extends ChaWidget {
         //ivLight = ((ImageView) findViewById(R.id.relay_light));
     }
 
-    public void setValue(int value) {
+    public void setValue(SensorData value) {
         this.value = value;
         refresh();
     }
 
     @Override
     public void refresh() {
-        tvSensorName.setText(getResources().getString(R.string.sensor) + " " + (this.Id + 1));
+        tvSensorName.setText(value.getName());
 
         //todo
-        int x = value;
+        int x = value.getState();
         if (x == 255)
             tvPercent.setText("- - - - %");
         else
@@ -137,12 +136,12 @@ public class SensorView extends ChaWidget {
 //        }
 //        tvBallValveSwitch.setText(text);
 
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.add(Calendar.MINUTE, -2);
-//        if (this.waterLevelData.getLastSyncTime() < calendar.getTimeInMillis())
-//            cardView.setCardBackgroundColor(Utils.getCardBackgroundColor(false, true));
-//        else
-//            cardView.setCardBackgroundColor(Utils.getCardBackgroundColor(false, false));
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE, -2);
+        if (value.getLastSyncTime() < calendar.getTimeInMillis())
+            cardView.setCardBackgroundColor(Utils.getCardBackgroundColor(false, true));
+        else
+            cardView.setCardBackgroundColor(Utils.getCardBackgroundColor(false, false));
     }
 
     @Override

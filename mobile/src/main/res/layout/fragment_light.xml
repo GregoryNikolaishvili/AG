@@ -18,42 +18,24 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/wrtIsOnlineLC"
+            android:id="@+id/wrtIsOnlineDevice"
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:paddingEnd="4dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
             android:paddingStart="4dp"
+            android:paddingLeft="4dp"
+            android:paddingEnd="4dp"
+            android:paddingRight="4dp"
             android:src="@drawable/wifi_off" />
 
         <ImageView
-            android:id="@+id/lcControllerIsOnline"
+            android:id="@+id/controllerIsOnlineDevice"
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:paddingEnd="4dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
             android:paddingStart="4dp"
+            android:paddingLeft="4dp"
+            android:paddingEnd="4dp"
+            android:paddingRight="4dp"
             android:src="@drawable/circle_red" />
-
-        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/lightsAutoMode"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="4dp"
-            card_view:cardPreventCornerOverlap="true"
-            card_view:cardUseCompatPadding="true">
-
-            <TextView
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:gravity="center"
-                android:text="Auto" />
-        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 </LinearLayout>

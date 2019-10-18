@@ -7,7 +7,7 @@ import java.util.Locale;
 
 import ge.altasoft.gia.ag.Utils;
 
-public abstract class RelayData implements Comparable<RelayData> {
+public class DeviceData implements Comparable<DeviceData> {
 
     final private int id;
     private int order;
@@ -16,11 +16,11 @@ public abstract class RelayData implements Comparable<RelayData> {
     private String name;
     private long lastSyncTime;
 
-    protected RelayData(int id) {
+    protected DeviceData(int id) {
         this.id = id;
         this.order = id;
         this.state = 0;
-        this.name = "Default Relay #" + id;
+        this.name = AquaControllerData.getDeviceName(id);
     }
 
     public long getLastSyncTime() {
@@ -42,7 +42,8 @@ public abstract class RelayData implements Comparable<RelayData> {
     private void setLastSyncTime() {
         lastSyncTime = new Date().getTime();
     }
-    private void setState(int value) {
+
+    protected void setState(int value) {
         this.state = value;
         setLastSyncTime();
     }
@@ -80,7 +81,7 @@ public abstract class RelayData implements Comparable<RelayData> {
     }
 
     @Override
-    public int compareTo(@NonNull RelayData o) {
+    public int compareTo(@NonNull DeviceData o) {
         if (Integer.valueOf(this.order).equals(o.order)) {
             return Integer.valueOf(this.id).compareTo(o.id);
         } else {

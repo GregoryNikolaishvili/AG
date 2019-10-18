@@ -9,20 +9,17 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.classes.ChaWidget;
 import ge.altasoft.gia.ag.classes.DashboardItem;
 import ge.altasoft.gia.ag.classes.DashboardItems;
+import ge.altasoft.gia.ag.classes.DeviceData;
 import ge.altasoft.gia.ag.classes.ItemTouchHelperAdapter;
 import ge.altasoft.gia.ag.classes.ItemViewHolder;
 import ge.altasoft.gia.ag.classes.OnStartDragListener;
-import ge.altasoft.gia.ag.light.LightControllerData;
-import ge.altasoft.gia.ag.light.LightRelayData;
-import ge.altasoft.gia.ag.other.AquaControllerData;
-import ge.altasoft.gia.ag.other.WaterLevelData;
-import ge.altasoft.gia.ag.other.WlPumpRelayData;
-import ge.altasoft.gia.ag.views.LightRelayView;
+import ge.altasoft.gia.ag.classes.SensorData;
+import ge.altasoft.gia.ag.views.DeviceView;
 import ge.altasoft.gia.ag.views.SensorView;
-import ge.altasoft.gia.ag.views.WlPumpRelayView;
 
 class DashboardRecyclerListAdapter extends RecyclerView.Adapter<ItemViewHolder> implements ItemTouchHelperAdapter {
 
@@ -55,25 +52,20 @@ class DashboardRecyclerListAdapter extends RecyclerView.Adapter<ItemViewHolder> 
             ll.removeAllViews();
 
         ChaWidget w;
-
         DashboardItem item = DashboardItems.getItemAt(position);
         switch (item.type) {
-            case LightRelay:
-                LightRelayData rd = LightControllerData.Instance.relays(item.id);
-                w = new LightRelayView(ll.getContext(), true);
-                ((LightRelayView) w).setRelayData(rd);
+            case Device:
+                DeviceData dValue = AquaControllerData.Instance.getDeviceValue(item.id);
+                DeviceView dv = AquaControllerData.Instance.createDeviceWidget(ll.getContext(), item.id, true);
+                w = dv;
+                dv.setValue(dValue);
                 break;
 
-            case WaterLevelSensor:
-                int value = AquaControllerData.Instance.getSensorValue(item.id);
-                w = new SensorView(ll.getContext(), true);
-                ((SensorView) w).setValue(value);
-                break;
-
-            case WaterLevelPumpRelay:
-                WlPumpRelayData wrd = AquaControllerData.Instance.relays(item.id);
-                w = new WlPumpRelayView(ll.getContext(), true);
-                ((WlPumpRelayView) w).setRelayData(wrd);
+            case Sensor:
+                SensorData sValue = AquaControllerData.Instance.getSensorValue(item.id);
+                SensorView sv = AquaControllerData.Instance.createSensorWidget(ll.getContext(), item.id, true);
+                w = sv;
+                sv.setValue(sValue);
                 break;
 
             default:

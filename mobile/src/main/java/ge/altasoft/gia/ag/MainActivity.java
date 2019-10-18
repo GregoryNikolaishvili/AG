@@ -21,24 +21,23 @@ import android.widget.Toast;
 
 import java.util.Map;
 
+import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.classes.ChaFragment;
 import ge.altasoft.gia.ag.classes.WidgetType;
-import ge.altasoft.gia.ag.light.FragmentLight;
-import ge.altasoft.gia.ag.light.LightControllerData;
-import ge.altasoft.gia.ag.other.FragmentSensors;
-import ge.altasoft.gia.ag.other.AquaControllerData;
 import ge.altasoft.gia.ag.other.WaterLevelSettingsActivity;
 
 public class MainActivity extends ChaActivity {
 
     private final Handler timerHandler = new Handler();
+
     private SectionsPagerAdapter pagerAdapter;
+
     private final Runnable timerRunnable = new Runnable() {
 
         @Override
         public void run() {
             for (int i = 0; i < pagerAdapter.getCount(); i++)
-                ((ChaFragment) pagerAdapter.getItem(i)).checkSensors();
+                ((ChaFragment) pagerAdapter.getItem(i)).refreshWidgets();
 
             timerHandler.postDelayed(this, 60000);
         }
@@ -164,12 +163,9 @@ public class MainActivity extends ChaActivity {
     protected void onStop() {
         super.onStop();
 
-        drawControllerStatus(false, R.id.lcControllerIsOnline);
-        drawControllerStatus(false, R.id.lcControllerIsOnline2);
-        drawControllerStatus(false, R.id.tsControllerIsOnline2);
-        drawControllerStatus(false, R.id.tsControllerIsOnline3);
-        drawControllerStatus(false, R.id.wlControllerIsOnline);
-        drawControllerStatus(false, R.id.wlControllerIsOnline2);
+        drawControllerStatus(false, R.id.controllerIsOnlineDash);
+        drawControllerStatus(false, R.id.controllerIsOnlineDevice);
+        drawControllerStatus(false, R.id.controllerIsOnlineSensor);
     }
 
 
@@ -217,8 +213,8 @@ public class MainActivity extends ChaActivity {
         switch (dataType) {
             case WrtState:
                 drawWrtStatus(Utils.lastMqttConnectionWrtIsOnline, R.id.wrtIsOnlineDash);
-                drawWrtStatus(Utils.lastMqttConnectionWrtIsOnline, R.id.wrtIsOnlineLC);
-                drawWrtStatus(Utils.lastMqttConnectionWrtIsOnline, R.id.wrtIsOnlineOther);
+                drawWrtStatus(Utils.lastMqttConnectionWrtIsOnline, R.id.wrtIsOnlineDevice);
+                drawWrtStatus(Utils.lastMqttConnectionWrtIsOnline, R.id.wrtIsOnlineSensor);
                 break;
 
             case ClientConnected:
@@ -227,8 +223,9 @@ public class MainActivity extends ChaActivity {
                 switch (clientId) {
                     case "Aquagod3":
                         value = intent.getBooleanExtra("value", false);
-                        drawControllerStatus(value && LightControllerData.Instance.isAlive(), R.id.wlControllerIsOnline);
-                        drawControllerStatus(value && LightControllerData.Instance.isAlive(), R.id.wlControllerIsOnline2);
+                        drawControllerStatus(value && AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineDash);
+                        drawControllerStatus(value && AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineDash);
+                        drawControllerStatus(value && AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineSensor);
                         break;
                 }
                 break;
@@ -236,8 +233,9 @@ public class MainActivity extends ChaActivity {
             case AquagodControllerAlive:
                 boardTimeInSec = intent.getLongExtra("BoardTimeInSec", 0);
                 AquaControllerData.Instance.SetAlive(boardTimeInSec);
-                drawControllerStatus(AquaControllerData.Instance.isAlive(), R.id.wlControllerIsOnline);
-                drawControllerStatus(AquaControllerData.Instance.isAlive(), R.id.wlControllerIsOnline2);
+                drawControllerStatus(AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineDash);
+                drawControllerStatus(AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineDevice);
+                drawControllerStatus(AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineSensor);
                 break;
 
             case AquagodControllerState:
@@ -285,17 +283,16 @@ public class MainActivity extends ChaActivity {
                 break;
 
 
-            case AquagodSensorState:
-                id = intent.getIntExtra("id", -1);
-
-                pagerAdapter.fragmentSensors.drawState(WidgetType.WaterLevelSensor, id);
-                pagerAdapter.fragmentDashboard.drawWidgetState(WidgetType.WaterLevelSensor, id);
-                break;
-
             case AquagodDeviceState:
                 id = intent.getIntExtra("id", -1);
-                pagerAdapter.fragmentSensors.drawState(WidgetType.WaterLevelPumpRelay, id);
-                pagerAdapter.fragmentDashboard.drawWidgetState(WidgetType.WaterLevelPumpRelay, id);
+                pagerAdapter.fragmentDevices.drawState(id);
+                pagerAdapter.fragmentDashboard.drawWidgetState(WidgetType.Device, id);
+                break;
+
+            case AquagodSensorState:
+                id = intent.getIntExtra("id", -1);
+                pagerAdapter.fragmentSensors.drawState(id);
+                pagerAdapter.fragmentDashboard.drawWidgetState(WidgetType.Sensor, id);
                 break;
 
             case AquagodSettings:
@@ -341,7 +338,7 @@ public class MainActivity extends ChaActivity {
         final private boolean isLandscape;
 
         FragmentDashboard fragmentDashboard = null;
-        FragmentLight fragmentLight = null;
+        FragmentDevices fragmentDevices = null;
         FragmentSensors fragmentSensors = null;
 
         SectionsPagerAdapter(FragmentManager fm, boolean isLandscape) {
@@ -350,7 +347,7 @@ public class MainActivity extends ChaActivity {
             this.isLandscape = isLandscape;
 
             fragmentDashboard = new FragmentDashboard();
-            fragmentLight = new FragmentLight();
+            fragmentDevices = new FragmentDevices();
             fragmentSensors = new FragmentSensors();
         }
 
@@ -362,7 +359,7 @@ public class MainActivity extends ChaActivity {
                 case 2:
                     return fragmentSensors;
                 case 1:
-                    return fragmentLight;
+                    return fragmentDevices;
             }
             return null;
         }

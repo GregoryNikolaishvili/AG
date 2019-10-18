@@ -17,6 +17,7 @@ import android.widget.BaseAdapter;
 import ge.altasoft.gia.ag.ChaPreferenceActivity;
 import ge.altasoft.gia.ag.R;
 import ge.altasoft.gia.ag.Utils;
+import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.views.FriendlyEditTextPreference;
 import ge.altasoft.gia.ag.views.TimePreference;
 
@@ -27,7 +28,8 @@ public class WaterLevelSettingsActivity extends ChaPreferenceActivity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        AquaControllerData.Instance.saveToPreferences(prefs);
+        //todo
+        //AquaControllerData.Instance.saveToPreferences(prefs);
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new PrefsFragment()).commit();
     }
@@ -41,7 +43,8 @@ public class WaterLevelSettingsActivity extends ChaPreferenceActivity {
                     new Runnable() {
                         public void run() {
                             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                            AquaControllerData.Instance.decode(prefs);
+                            //todo
+                            //AquaControllerData.Instance.decode(prefs);
 
                             setResult(Activity.RESULT_OK, null); //The data you want to send back
                             context.finish();
@@ -159,7 +162,7 @@ public class WaterLevelSettingsActivity extends ChaPreferenceActivity {
 
                         String name = namePref.getText();
                         if (name == null)
-                            name = "Relay #" + AquaControllerData.Instance.relays(i).getId();
+                            name = "Device #" + AquaControllerData.Instance.getDeviceValue(i).getId();
                         screen.setTitle(name);
 
                         if (isActivePref.isChecked()) {

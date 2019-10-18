@@ -28,7 +28,7 @@
             android:src="@drawable/wifi_off" />
 
         <ImageView
-            android:id="@+id/lcControllerIsOnline2"
+            android:id="@+id/controllerIsOnlineDash"
             android:layout_width="20dp"
             android:layout_height="match_parent"
             android:paddingEnd="4dp"
@@ -36,27 +36,6 @@
             android:paddingRight="4dp"
             android:paddingStart="4dp"
             android:src="@drawable/circle_red" />
-
-        <ImageView
-            android:id="@+id/tsControllerIsOnline2"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:paddingEnd="4dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:paddingStart="4dp"
-            android:src="@drawable/circle_red" />
-
-        <ImageView
-            android:id="@+id/wlControllerIsOnline2"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:paddingEnd="4dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:paddingStart="4dp"
-            android:src="@drawable/circle_red" />
-
 
         <TextView
             android:id="@+id/controllersStatus"

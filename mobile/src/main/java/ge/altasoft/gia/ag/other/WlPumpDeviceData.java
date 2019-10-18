@@ -1,11 +1,11 @@
-package ge.altasoft.gia.ag.light;
+package ge.altasoft.gia.ag.other;
 
 import android.content.SharedPreferences;
 
 import ge.altasoft.gia.ag.Utils;
-import ge.altasoft.gia.ag.classes.RelayData;
+import ge.altasoft.gia.ag.classes.DeviceData;
 
-public final class LightRelayData extends RelayData {
+public final class WlPumpDeviceData extends DeviceData {
 
     private static final char OFF_SUNRISE = 'S';
     private static final char OFF_TIME = 'T';
@@ -16,7 +16,7 @@ public final class LightRelayData extends RelayData {
     private String offMode;
     private short offValue;
 
-    LightRelayData(int id) {
+    WlPumpDeviceData(int id) {
         super(id);
 
         this.isActive = false;
@@ -50,25 +50,25 @@ public final class LightRelayData extends RelayData {
     void decodeSettings(SharedPreferences prefs) {
         String suffix = Integer.toString(getId());
 
-        isActive = prefs.getBoolean("l_is_active_" + suffix, false);
-        onOffset = (short) prefs.getInt("l_on_offset_" + suffix, 0);
-        offMode = prefs.getString("l_off_mode_" + suffix, "S");
+        isActive = prefs.getBoolean("wl_is_active_" + suffix, false);
+        onOffset = (short) prefs.getInt("wl_on_offset_" + suffix, 0);
+        offMode = prefs.getString("wl_off_mode_" + suffix, "S");
 
-        short value = (short) prefs.getInt("l_off_value_" + suffix, 0);
+        short value = (short) prefs.getInt("wl_off_value_" + suffix, 0);
         if ((value < 0) && (offMode.equals("T") || offMode.equals("D"))) // positive values only
             value = 0;
         offValue = value;
 
-        setName(prefs.getString("l_relay_name_" + suffix, "Relay #" + suffix));
+        setName(prefs.getString("wl_relay_name_" + suffix, "Relay #" + suffix));
     }
 
     void encodeSettings(SharedPreferences.Editor editor) {
         String suffix = Integer.toString(getId());
 
-        editor.putBoolean("l_is_active_" + suffix, isActive);
-        editor.putInt("l_on_offset_" + suffix, onOffset);
-        editor.putString("l_off_mode_" + suffix, offMode);
-        editor.putInt("l_off_value_" + suffix, offValue);
-        editor.putString("l_relay_name_" + suffix, getName());
+        editor.putBoolean("wl_is_active_" + suffix, isActive);
+        editor.putInt("wl_on_offset_" + suffix, onOffset);
+        editor.putString("wl_off_mode_" + suffix, offMode);
+        editor.putInt("wl_off_value_" + suffix, offValue);
+        editor.putString("wl_relay_name_" + suffix, getName());
     }
 }

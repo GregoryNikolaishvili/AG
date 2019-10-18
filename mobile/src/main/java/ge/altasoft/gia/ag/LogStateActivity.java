@@ -21,10 +21,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import ge.altasoft.gia.ag.classes.DeviceData;
 import ge.altasoft.gia.ag.classes.LogOneValueItem;
-import ge.altasoft.gia.ag.classes.RelayData;
 import ge.altasoft.gia.ag.classes.WidgetType;
-import ge.altasoft.gia.ag.other.AquaControllerData;
 
 public class LogStateActivity extends ChaActivity {
 
@@ -53,11 +52,11 @@ public class LogStateActivity extends ChaActivity {
 
     private void RequestLog(int wd) {
         switch (scope) {
-            case BoilerPump:
-                publish("aquagod/hub/getlog", "brelay_".concat(String.valueOf(wd)), false);
+            case Device:
+                publish("aquagod/hub/getlog", "device_".concat(String.valueOf(wd)), false);
                 break;
-            case LightRelay:
-                publish("aquagod/hub/getlog", "light_".concat(String.valueOf(wd)), false);
+            case Sensor:
+                publish("aquagod/hub/getlog", "sensor_".concat(String.valueOf(wd)), false);
                 break;
         }
     }
@@ -69,61 +68,7 @@ public class LogStateActivity extends ChaActivity {
         RequestLog(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1);
     }
 
-    @Override
-    public void processMqttData(MqttClientLocal.MQTTReceivedDataType dataType, Intent intent) {
-        super.processMqttData(dataType, intent);
-
-        int id;
-        RelayData data;
-
-        switch (dataType) {
-
-            case AquagodDeviceState:
-                if (scope != WidgetType.WaterLevelPumpRelay)
-                    return;
-                id = intent.getIntExtra("id", -1);
-                if (id != relayId)
-                    return;
-
-                data = AquaControllerData.Instance.relays(id);
-
-                LogOneValueItem point3 = new LogOneValueItem(new Date(data.getLastSyncTime()), data.getState());
-                logBuffer.add(point3);
-                adapter.notifyDataSetChanged();
-
-                break;
-
-            case Log:
-                switch (scope) {
-                    case BoilerPump:
-                        if (intent.getStringExtra("type").startsWith("brelay")) {
-                            String log = intent.getStringExtra("log");
-                            FillRelayLog(relayId, log, logBuffer);
-                            adapter.notifyDataSetChanged();
-                        }
-                        break;
-
-                    case LightRelay:
-                        if (intent.getStringExtra("type").startsWith("light")) {
-                            String log = intent.getStringExtra("log");
-                            FillRelayLog(relayId, log, logBuffer);
-                            adapter.notifyDataSetChanged();
-                        }
-                        break;
-
-                    case WaterLevelPumpRelay:
-                        if (intent.getStringExtra("type").startsWith("trelay")) {
-                            String log = intent.getStringExtra("log");
-                            FillRelayLog(relayId, log, logBuffer);
-                            adapter.notifyDataSetChanged();
-                        }
-                        break;
-                }
-                break;
-        }
-    }
-
-    class StateLogAdapter extends ArrayAdapter<LogOneValueItem> {
+      class StateLogAdapter extends ArrayAdapter<LogOneValueItem> {
         StateLogAdapter(Context context, ArrayList<LogOneValueItem> points) {
             super(context, 0, points);
         }

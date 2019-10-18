@@ -14,8 +14,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
 
-import ge.altasoft.gia.ag.LogActivity2;
-import ge.altasoft.gia.ag.LogActivityTH2;
 import ge.altasoft.gia.ag.LogStateActivity;
 import ge.altasoft.gia.ag.R;
 import ge.altasoft.gia.ag.Utils;
@@ -196,22 +194,22 @@ public abstract class ChaWidget extends LinearLayout {
                     DashboardItems.add(getContext(), getWidgetType(), getWidgetId());
                 break;
 
-            case R.id.item_log_and_chart: {
-                Intent intent = new Intent(getContext(), LogActivityTH2.class);
-                intent.putExtra("id", getWidgetId());
-                intent.putExtra("widget", getWidgetType());
-                getContext().startActivity(intent);
-                break;
-            }
-
-            case R.id.item_log_and_chart2: {
-                //Intent intent = new Intent(getContext(), Log5in1Activity.class);
-                Intent intent = new Intent(getContext(), LogActivity2.class);
-                intent.putExtra("id", getWidgetId());
-                intent.putExtra("widget", getWidgetType());
-                getContext().startActivity(intent);
-                break;
-            }
+//            case R.id.item_log_and_chart: {
+//                Intent intent = new Intent(getContext(), LogActivityTH2.class);
+//                intent.putExtra("id", getWidgetId());
+//                intent.putExtra("widget", getWidgetType());
+//                getContext().startActivity(intent);
+//                break;
+//            }
+//
+//            case R.id.item_log_and_chart2: {
+//                //Intent intent = new Intent(getContext(), Log5in1Activity.class);
+//                Intent intent = new Intent(getContext(), LogActivity2.class);
+//                intent.putExtra("id", getWidgetId());
+//                intent.putExtra("widget", getWidgetType());
+//                getContext().startActivity(intent);
+//                break;
+//            }
 
             case R.id.item_log: {
                 Intent intent = new Intent(getContext(), LogStateActivity.class);

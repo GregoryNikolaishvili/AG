@@ -85,7 +85,7 @@ public class DashboardItems {
 
         String saved = prefs.getString("dashboard_items", null);
         if (saved == null)
-            saved = "LightRelay:8;LightRelay:9;LightRelay:10;LightRelay:11;LightRelay:4;LightRelay:5;LightRelay:3;LightRelay:2;LightRelay:6;";
+            saved = "Device:8;Device:9;Device:10;Device:11;Device:4;Device:5;Device:3;Device:2;Device:6;"; //todo
 
         dashboardItems.clear();
         String[] items = saved.split(";");

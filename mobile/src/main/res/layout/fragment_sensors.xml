@@ -18,33 +18,23 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/wrtIsOnlineOther"
+            android:id="@+id/wrtIsOnlineSensor"
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:paddingEnd="4dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
             android:paddingStart="4dp"
+            android:paddingLeft="4dp"
+            android:paddingEnd="4dp"
+            android:paddingRight="4dp"
             android:src="@drawable/wifi_off" />
 
         <ImageView
-            android:id="@+id/tsControllerIsOnline3"
+            android:id="@+id/controllerIsOnlineSensor"
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:paddingEnd="4dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
             android:paddingStart="4dp"
-            android:src="@drawable/circle_red" />
-
-        <ImageView
-            android:id="@+id/wlControllerIsOnline"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:paddingEnd="4dp"
             android:paddingLeft="4dp"
+            android:paddingEnd="4dp"
             android:paddingRight="4dp"
-            android:paddingStart="4dp"
             android:src="@drawable/circle_red" />
     </LinearLayout>
 </LinearLayout>
