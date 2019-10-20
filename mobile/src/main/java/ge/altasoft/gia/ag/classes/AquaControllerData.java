@@ -32,39 +32,39 @@ public class AquaControllerData {
     final static int DEVICE_LIGHT_2 = 1;
     final static int DEVICE_LIGHT_3 = 2;
     final static int DEVICE_LIGHT_4 = 3;
+
     final static int DEVICE_LIGHT_5 = 4;
-    final static int DEVICE_EXHAUST_FAN = 5;
-    final static int DEVICE_FEEDER_1 = 6;
-    final static int DEVICE_FEEDER_2 = 7;
+    final static int DEVICE_UV_LIGHT = 5;
+    final static int DEVICE_AQUA_HEATER = 6;
+    final static int DEVICE_AQUA_RECIRCULATE_PUMP = 7;
 
-    // 2nd board
-    final static int DEVICE_O2 = 8;
-    final static int DEVICE_CO2 = 9;
-    final static int DEVICE_AQUA_RECIRCULATE_PUMP = 10;
-    final static int DEVICE_WATER_DRAIN_PUMP = 11;
-    final static int DEVICE_DEVICE_220_A = 12;
-    final static int DEVICE_DEVICE_220_B = 13;
-    final static int DEVICE_MOON_LIGHT = 14;
-    final static int DEVICE_BOARD_2_RELAY_FREE = 15;
+    final static int DEVICE_FILTER_1 = 8;
+    final static int DEVICE_FILTER_2 = 9;
+    final static int DEVICE_O2 = 10;
+    final static int DEVICE_CO2 = 11;
 
-    // 3rd board
-    final static int DEVICE_WATER_FILL_PUMP = 16;
-    final static int DEVICE_DOSING_PUMP_MACRO = 17; // BOARD_3_RELAY_4
-    final static int DEVICE_DOSING_PUMP_MICRO = 18; // SUMP_O2
-    final static int DEVICE_SUMP_RECIRCULATE_PUMP = 19;
-    final static int DEVICE_UV_LIGHT = 20;
-    final static int DEVICE_FILTER_2 = 21;
-    final static int DEVICE_FILTER_1 = 22;
-    final static int DEVICE_HOSPITAL_LIGHT = 23;
+    final static int DEVICE_FEEDER_1 = 12;
+    final static int DEVICE_FEEDER_2 = 13;
+    final static int DEVICE_WATER_DRAIN_PUMP = 14;
+    final static int DEVICE_WATER_FILL_PUMP = 15;
 
-    // SSR
-    final static int DEVICE_HEATER = 24;
-    final static int DEVICE_SUMP_HEATER = 25;
-    final static int DEVICE_HOSPITAL_HEATER = 26;
+    final static int DEVICE_SUMP_RECIRCULATE_PUMP = 16;
+    final static int DEVICE_SUMP_HEATER = 17;
+    final static int DEVICE_HOSPITAL_LIGHT = 18;
+    final static int DEVICE_HOSPITAL_HEATER = 19;
 
-    final static int DEVICE_SOLENOID = 27; // main water shutoff
-    final static int DEVICE_BOARD_FAN = 28;
-    final static int DEVICE_MAINTENANCE_MODE = 29;
+    final static int DEVICE_SOLENOID = 20; // main water shutoff
+    final static int DEVICE_BOARD_FAN = 21;
+    final static int DEVICE_EXHAUST_FAN = 22;
+    final static int DEVICE_MAINTENANCE_MODE = 23;
+
+    final static int DEVICE_DEVICE_220_A = 24;
+    final static int DEVICE_DEVICE_220_B = 25;
+    final static int DEVICE_DEVICE_220C = 26;
+    final static int DEVICE_BOARD_2_RELAY_FREE = 27;
+
+    final static int DEVICE_DOSING_PUMP_MACRO = 28;
+    final static int DEVICE_DOSING_PUMP_MICRO = 29;
 
     // sensor IDs
     final static int SENSOR_T_AQUARIUM_1 = 0;
@@ -231,8 +231,8 @@ public class AquaControllerData {
                 return "220v A";
             case DEVICE_DEVICE_220_B:
                 return "220v B";
-            case DEVICE_MOON_LIGHT:
-                return "Moon light";
+            case DEVICE_DEVICE_220C:
+                return "200v C";
             case DEVICE_BOARD_2_RELAY_FREE:
                 return "Free";
             case DEVICE_WATER_FILL_PUMP:
@@ -251,7 +251,7 @@ public class AquaControllerData {
                 return "Filter 1";
             case DEVICE_HOSPITAL_LIGHT:
                 return "Hospital light";
-            case DEVICE_HEATER:
+            case DEVICE_AQUA_HEATER:
                 return "Aqua heater";
             case DEVICE_SUMP_HEATER:
                 return "Sump heater";
@@ -280,7 +280,6 @@ public class AquaControllerData {
             case DEVICE_LIGHT_4:
             case DEVICE_LIGHT_5:
             case DEVICE_HOSPITAL_LIGHT:
-            case DEVICE_MOON_LIGHT:
             case DEVICE_UV_LIGHT:
                 w = new LightView(context, fromDashboard);
                 break;
@@ -288,7 +287,7 @@ public class AquaControllerData {
             case DEVICE_FILTER_2:
                 w = new FilterView(context, fromDashboard);
                 break;
-            case DEVICE_HEATER:
+            case DEVICE_AQUA_HEATER:
             case DEVICE_HOSPITAL_HEATER:
             case DEVICE_SUMP_HEATER:
                 w = new HeaterView(context, fromDashboard);
