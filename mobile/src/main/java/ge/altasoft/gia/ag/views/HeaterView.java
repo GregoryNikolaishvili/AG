@@ -3,11 +3,14 @@ package ge.altasoft.gia.ag.views;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import java.util.Locale;
+
+import ge.altasoft.gia.ag.ChaActivity;
 import ge.altasoft.gia.ag.R;
 
 public class HeaterView extends DeviceView {
 
-       public HeaterView(Context context, boolean fromDashboard) {
+    public HeaterView(Context context, boolean fromDashboard) {
         super(context, fromDashboard);
     }
 
@@ -20,9 +23,17 @@ public class HeaterView extends DeviceView {
     }
 
     @Override
-    protected int getLayoutId()
-    {
+    protected int getLayoutId() {
         return R.layout.heater_view_layout;
+    }
+
+    @Override
+    protected void onClick() {
+        int newState = value.getState() + 10;
+        if (newState > 100)
+            newState = 0;
+        ((ChaActivity) getContext()).publish(String.format(Locale.US, "aquagodc/state/%02X", value.getId()), String.format(Locale.US, "%04X", newState), false);
+        setState(ButtonState.WAIT);
     }
 
     @Override
@@ -51,6 +62,7 @@ public class HeaterView extends DeviceView {
     public void refresh() {
         super.refresh();
 
-        tvDeviceName.setText(tvDeviceName.getText() + "\n" + Integer.toString(value.getState()) + " %");
+        if (value.getState() > 0)
+            tvDeviceName.setText(tvDeviceName.getText() + "\n" + Integer.toString(value.getState()) + " %");
     }
 }

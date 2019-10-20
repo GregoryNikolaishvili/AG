@@ -243,26 +243,44 @@ public class MainActivity extends ChaActivity {
                 state = intent.getIntExtra("state", 0);
 
                 if (state != 0) {
-                    if ((state & Utils.ERR_TIME_NOT_SET) != 0) {
-                        sb.append("Time not set");
-                        sb.append("\r\n");
-                    }
-                    if ((state & Utils.ERR_ULTRASONIC) != 0) {
-                        sb.append("Ultrasonic sensor error");
-                        sb.append("\r\n");
-                    }
-                    if ((state & Utils.ERR_TEMPERATURES) != 0) {
-                        sb.append("Temperature sensor error");
-                        sb.append("\r\n");
-                    }
                     if ((state & Utils.ERR_SYSTEM) != 0) {
                         sb.append("System error");
+                        sb.append("\r\n");
+                    }
+                    if ((state & Utils.ERR_TIME_NOT_SET) != 0) {
+                        sb.append("Time not set");
                         sb.append("\r\n");
                     }
                     if ((state & Utils.ERR_INTERNET) != 0) {
                         sb.append("No internet connection error");
                         sb.append("\r\n");
                     }
+                    if ((state & Utils.ERR_ULTRASONIC) != 0) {
+                        sb.append("Ultrasonic sensor error");
+                        sb.append("\r\n");
+                    }
+                    if ((state & Utils.ERR_TEMPERATURE_1) != 0) {
+                        sb.append("Temperature sensor #1 error ");
+                        sb.append("\r\n");
+                    }
+
+                    if ((state & Utils.ERR_TEMPERATURE_2) != 0) {
+                        sb.append("Temperature sensor #2 error");
+                        sb.append("\r\n");
+                    }
+                    if ((state & Utils.ERR_TEMPERATURE_3) != 0) {
+                        sb.append("Temperature sensor #3 error");
+                        sb.append("\r\n");
+                    }
+                    if ((state & Utils.ERR_TEMPERATURE_4) != 0) {
+                        sb.append("Temperature sensor #4 error");
+                        sb.append("\r\n");
+                    }
+                    if ((state & Utils.ERR_TEMPERATURE_5) != 0) {
+                        sb.append("Temperature sensor #5 error");
+                        sb.append("\r\n");
+                    }
+
 
                     if (sb.length() >= 2) // delete last \r\n
                         sb.setLength(sb.length() - 2);

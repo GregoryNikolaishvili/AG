@@ -28,15 +28,6 @@ public class FanView extends DeviceView {
     }
 
     @Override
-    protected void onClick() {
-        int newState = value.getState() + 10;
-        if (newState > 100)
-            newState = 0;
-        ((ChaActivity) getContext()).publish(String.format(Locale.US, "aquagodc/state/%02X", value.getId()), String.format(Locale.US, "%04X", newState), false);
-        setState(ButtonState.WAIT);
-    }
-
-    @Override
     protected void setState(ButtonState state) {
         buttonState = state;
 
@@ -54,14 +45,6 @@ public class FanView extends DeviceView {
                 ivPicture.setImageResource(R.drawable.fan_indicator_wait);
                 break;
         }
-    }
-
-    @Override
-    public void refresh() {
-        super.refresh();
-
-        if (value.getState() > 0)
-            tvDeviceName.setText(tvDeviceName.getText() + "\n" + Integer.toString(value.getState()) + " %");
     }
 
 //    @Override

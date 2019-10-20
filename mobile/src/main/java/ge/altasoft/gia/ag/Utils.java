@@ -42,12 +42,16 @@ public class Utils {
     public final static float F_UNDEFINED = 999.9f;
     public final static float I_UNDEFINED = 32767;
 
-    final static int ERR_TIME_NOT_SET = 0x01;
-    final static int ERR_TEMPERATURES = 0x02;
+    final static int ERR_SYSTEM = 0x01;
+    final static int ERR_TIME_NOT_SET = 0x02;
     final static int ERR_INTERNET = 0x04;
-    final static int ERR_SYSTEM = 0x80;
-    final static int ERR_ULTRASONIC = 0x80;
-
+    final static int ERR_ULTRASONIC = 0x08;
+    final static int ERR_TEMPERATURE_1 = 0x10;
+    final static int ERR_TEMPERATURE_2 = 0x20;
+    final static int ERR_TEMPERATURE_3 = 0x40;
+    final static int ERR_TEMPERATURE_4 = 0x80;
+    final static int ERR_TEMPERATURE_5 = 0x100;
+  
     static final int ACTIVITY_REQUEST_RESULT_SETTINGS = 1;
 
 
