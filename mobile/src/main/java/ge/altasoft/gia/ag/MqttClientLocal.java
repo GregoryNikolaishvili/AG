@@ -49,9 +49,7 @@ public class MqttClientLocal {
         AquagodSensorState,
         AquagodDeviceState,
 
-        AquagodSettings,
-        AquagodNameAndOrders
-
+        AquagodSettings
     }
 
     enum MQTTConnectionStatus {

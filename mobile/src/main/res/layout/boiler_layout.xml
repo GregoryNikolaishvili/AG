@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/boilerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <ge.altasoft.gia.ag.views.BoilerSensorView
+        android:id="@+id/tankView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <ge.altasoft.gia.ag.views.BoilerSensorView
+        android:id="@+id/tankView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+</LinearLayout>

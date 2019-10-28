@@ -20,8 +20,7 @@
     <string name="manual">Manual</string>
 
     <string name="sample_temperature">25.5°</string>
-    <string name="sample_temperature2">1°</string>
-    <string name="sample_temperature3">110°</string>
+    <string name="sample_heater">100%</string>
     <string name="loading">Loading&#8230;</string>
     <string name="sample_normal">normal</string>
     <string name="sample_4">4</string>

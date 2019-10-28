@@ -62,8 +62,12 @@ public class MainActivity extends ChaActivity {
 
         // Set up the ViewPager with the sections adapter.
         ViewPager viewPager = (ViewPager) findViewById(R.id.container);
-        viewPager.setOffscreenPageLimit(8);
+        viewPager.setOffscreenPageLimit(5);
         viewPager.setAdapter(pagerAdapter);
+
+        if (savedInstanceState == null) {
+            viewPager.setCurrentItem(1);
+        }
     }
 
     @Override
@@ -314,7 +318,6 @@ public class MainActivity extends ChaActivity {
                 break;
 
             case AquagodSettings:
-            case AquagodNameAndOrders:
                 pagerAdapter.fragmentSensors.rebuildUI(false);
                 pagerAdapter.fragmentDashboard.rebuildUI(false);
                 break;
@@ -355,6 +358,7 @@ public class MainActivity extends ChaActivity {
 
         final private boolean isLandscape;
 
+        FragmentBoiler fragmentTank = null;
         FragmentDashboard fragmentDashboard = null;
         FragmentDevices fragmentDevices = null;
         FragmentSensors fragmentSensors = null;
@@ -364,6 +368,7 @@ public class MainActivity extends ChaActivity {
 
             this.isLandscape = isLandscape;
 
+            fragmentTank = new FragmentBoiler();
             fragmentDashboard = new FragmentDashboard();
             fragmentDevices = new FragmentDevices();
             fragmentSensors = new FragmentSensors();
@@ -373,29 +378,33 @@ public class MainActivity extends ChaActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
+                    return fragmentTank;
+                case 1:
                     return fragmentDashboard;
                 case 2:
-                    return fragmentSensors;
-                case 1:
                     return fragmentDevices;
+                case 3:
+                    return fragmentSensors;
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Dashboard";
+                    return "Tank";
                 case 1:
-                    return "Sensors";
+                    return "Dashboard";
                 case 2:
                     return "Devices";
+                case 3:
+                    return "Sensors";
             }
             return null;
         }

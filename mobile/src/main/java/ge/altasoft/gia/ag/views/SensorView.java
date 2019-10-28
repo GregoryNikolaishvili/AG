@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 import ge.altasoft.gia.ag.R;
 import ge.altasoft.gia.ag.Utils;
@@ -16,16 +15,12 @@ import ge.altasoft.gia.ag.classes.WidgetType;
 
 public class SensorView extends ChaWidget {
 
-//    private enum ButtonState {UNKNOWN, ON, OFF, WAIT}
-
     protected TextView tvSensorName;
     protected TextView tvValue;
 
     protected int defaultTextColor;
 
     protected SensorData value;
-
-//    private ButtonState buttonState = ButtonState.UNKNOWN;
 
     public SensorView(Context context, boolean fromDashboard) {
         super(context, fromDashboard);
@@ -95,9 +90,6 @@ public class SensorView extends ChaWidget {
         Integer x = value.getState();
         tvValue.setText(x.toString());
 
-//        if (this.waterLevelData.getFloatSwitchIsOn())
-//            tvValue.setTextColor(Color.CYAN);
-//        else
         tvValue.setTextColor(defaultTextColor);
 
         Calendar calendar = Calendar.getInstance();

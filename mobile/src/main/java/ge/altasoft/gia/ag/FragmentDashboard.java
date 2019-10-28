@@ -14,7 +14,6 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Map;
 
-import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.classes.ChaFragment;
 import ge.altasoft.gia.ag.classes.ChaWidget;
 import ge.altasoft.gia.ag.classes.DashboardItems;

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/sensor_margin_size"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:cardUseCompatPadding="true">
+
+
+    <View
+        android:id="@+id/water_on_top"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_gravity="top"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:background="@android:color/holo_blue_light" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:rotation="-90"
+                android:layout_marginLeft="30dp"
+                android:text="Aqua" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="75"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/temperature_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/sample_temperature"
+                    android:textSize="@dimen/boiler_sensor_t_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/target_temperature"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/heater_value"
+                    style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:progress="25"
+                    android:progressDrawable="@drawable/redprogress"
+                    android:secondaryProgress="75" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pump_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="25"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@android:color/holo_blue_light" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/light_value"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bulb_indicator_yellow" />
+
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="0dp" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/light2_value"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bulb_indicator_off" />
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="0dp" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/light3_value"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bulb_indicator_violet" />
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="0dp" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/light4_value"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bulb_indicator_violet" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/pump_value"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/pump_indicator_on" />
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="0dp" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/filter1_value"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/filter1_indicator_on" />
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="0dp" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/filter2_value"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/filter1_indicator_on" />
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="0dp" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/o2_value"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/o2_indicator_on" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/water_on_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:background="@android:color/holo_blue_light" />
+
+</android.support.v7.widget.CardView>

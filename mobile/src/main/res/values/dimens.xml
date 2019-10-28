@@ -12,8 +12,8 @@
     <dimen name="sensor_footer_size">7sp</dimen>
     <dimen name="sensor_margin_size">2dp</dimen>
 
-    <dimen name="boiler_sensor_min_width">30dp</dimen>
-    <dimen name="boiler_sensor_t_size">20sp</dimen>
+    <dimen name="boiler_sensor_min_width">60dp</dimen>
+    <dimen name="boiler_sensor_t_size">36sp</dimen>
     <dimen name="boiler_sensor_trend_size">14sp</dimen>
     <dimen name="boiler_sensor_target_size">10sp</dimen>
 
