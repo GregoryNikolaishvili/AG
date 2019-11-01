@@ -1,7 +1,5 @@
 package ge.altasoft.gia.ag;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
@@ -10,34 +8,20 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
-import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.model.XYSeries;
-import org.achartengine.renderer.XYMultipleSeriesRenderer;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
+import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.classes.ChaFragment;
 import ge.altasoft.gia.ag.classes.ItemViewHolder;
+import ge.altasoft.gia.ag.views.AquaTankView;
+import ge.altasoft.gia.ag.views.HospitalTankView;
+import ge.altasoft.gia.ag.views.SumpTankView;
 
 
 public class FragmentBoiler extends ChaFragment {
-
-    private boolean haveLogData = false;
-
-    private GraphicalView mChartView;
-    private final XYMultipleSeriesDataset xyDataSet = new XYMultipleSeriesDataset();
-    private XYMultipleSeriesRenderer mRenderer;
-    private Date mMaxXX;
 
     public FragmentBoiler() {
     }
@@ -112,99 +96,20 @@ public class FragmentBoiler extends ChaFragment {
 
         final View boilerLayout = rootView.findViewById(R.id.boilerLayout);
 
-        //region relayout
-//        boilerLayout.getViewTreeObserver().
-//                addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//                                              @Override
-//                                              public void onGlobalLayout() {
-//                                                  //At this point the layout is complete
-//
-//                                                  final int boilerImageWidth = 520;
-//                                                  final int boilerImageHeight = 320;
-//
-//                                                  final int solarPipePositionX = 110;
-//                                                  final int solarPipePositionY = 290;
-//
-//                                                  final int heaterPipePositionX = 420;
-//                                                  final int heaterPipePositionY = 190;
-//
-//                                                  final int topSensorPositionY = 130;
-//                                                  final int bottomSensorPositionY = 235;
-//
-//                                                  final int solarPanelTopRightX = 130;
-//                                                  final int solarPanelTopRightY = 28;
-//
-//                                                  final int solarPanelLeftBottomX = 34;
-//                                                  final int solarPanelLeftBottomY = 112;
-//
-//                                                  float scaleX = boilerLayout.getWidth() / (float) boilerImageWidth;
-//                                                  float scaleY = boilerLayout.getHeight() / (float) boilerImageHeight;
-//
-//                                                  PumpView pump = (PumpView) rootView.findViewById(R.id.boilerPumpSolarPanel);
-//                                                  RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) pump.getLayoutParams();
-//                                                  lp.setMargins(
-//                                                          Math.round(solarPipePositionX * scaleX - pump.getWidth() / 2f),
-//                                                          Math.round(solarPipePositionY * scaleY - pump.getHeight() / 2f),
-//                                                          0,
-//                                                          0);
-//                                                  pump.setLayoutParams(lp);
-//
-//                                                  pump = (PumpView) rootView.findViewById(R.id.boilerPumpHeating);
-//                                                  lp = (RelativeLayout.LayoutParams) pump.getLayoutParams();
-//                                                  lp.setMargins(
-//                                                          Math.round(heaterPipePositionX * scaleX - pump.getWidth() / 2f),
-//                                                          Math.round(heaterPipePositionY * scaleY - pump.getHeight() / 2f),
-//                                                          0,
-//                                                          0);
-//                                                  pump.setLayoutParams(lp);
-//
-//                                                  BoilerSensorView sensor = (BoilerSensorView) rootView.findViewById(R.id.boilerSensorTankTop);
-//                                                  lp = (RelativeLayout.LayoutParams) sensor.getLayoutParams();
-//                                                  lp.setMargins(
-//                                                          0,
-//                                                          Math.round(topSensorPositionY * scaleY - sensor.getHeight() / 2f),
-//                                                          0,
-//                                                          0);
-//                                                  sensor.setLayoutParams(lp);
-//
-//                                                  sensor = (BoilerSensorView) rootView.findViewById(R.id.boilerSensorTankBottom);
-//                                                  lp = (RelativeLayout.LayoutParams) sensor.getLayoutParams();
-//                                                  lp.setMargins(
-//                                                          0,
-//                                                          Math.round(bottomSensorPositionY * scaleY - sensor.getHeight() / 2f),
-//                                                          0,
-//                                                          0);
-//                                                  sensor.setLayoutParams(lp);
-//
-//
-//                                                  // solar panel temperature
-//                                                  float angleRadians = (float) Math.atan((solarPanelTopRightY - solarPanelLeftBottomY) * scaleY / ((solarPanelTopRightX - solarPanelLeftBottomX) * scaleX));
-//
-//                                                  sensor = (BoilerSensorView) rootView.findViewById(R.id.boilerSensorSolarPanel);
-//                                                  lp = (RelativeLayout.LayoutParams) sensor.getLayoutParams();
-//                                                  lp.setMargins(
-//                                                          Math.round((solarPanelTopRightX + solarPanelLeftBottomX) / 2f * scaleX + sensor.getHeight() * (float) Math.sin(angleRadians) / 2f - sensor.getWidth() / 2f),
-//                                                          Math.round((solarPanelTopRightY + solarPanelLeftBottomY) / 2f * scaleY - sensor.getHeight() * (float) Math.cos(angleRadians) / 2f - sensor.getHeight() / 2f),
-//                                                          0,
-//                                                          0);
-//                                                  sensor.setLayoutParams(lp);
-//
-//                                                  sensor.setPivotX(sensor.getWidth() / 2f);
-//                                                  sensor.setPivotY(sensor.getHeight() / 2f);
-//                                                  sensor.setRotation((float) Math.toDegrees(angleRadians));
-//                                              }
-//                                          }
-//
-//                );
-        //endregion
-
         return rootView;
     }
 
 
     @Override
+    public void refreshWidgets() {
+        rebuildUI(false);
+    }
+
+    @Override
     public void rebuildUI(boolean isStart) {
         if (rootView == null)
+            return;
+        if (AquaControllerData.Instance == null)
             return;
 //        if (!AquaControllerData.Instance.haveSettings())
 //            return;
@@ -216,12 +121,7 @@ public class FragmentBoiler extends ChaFragment {
 //
 //        ((BoilerFurnaceView) rootView.findViewById(R.id.boilerFurnace)).setRelayId(ThermostatControllerData.BOILER_FURNACE);
 
-        //drawSensorAndRelayStates();
-
-        if (isStart || !haveLogData) {
-            haveLogData = false;
-            ((ChaActivity) getActivity()).publish("cha/hub/getlog", "boiler_".concat(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1)), false);
-        }
+        drawSensorAndRelayStates();
     }
 
     private Date getNowMinus4Hour() {
@@ -236,7 +136,7 @@ public class FragmentBoiler extends ChaFragment {
         return calendar.getTime();
     }
 
-//    public void drawSensorState(int id) {
+    //    public void drawSensorState(int id) {
 //        if (rootView == null)
 //            return;
 //
@@ -313,8 +213,10 @@ public class FragmentBoiler extends ChaFragment {
 //
 //    }
 //
-//    private void drawSensorAndRelayStates() {
-//        ((BoilerSensorView) rootView.findViewById(R.id.boilerSensorSolarPanel)).setSensorData(ThermostatControllerData.Instance.boilerSensors(ThermostatControllerData.BOILER_SENSOR_SOLAR_PANEL));
+    private void drawSensorAndRelayStates() {
+        ((AquaTankView) rootView.findViewById(R.id.aquaBigView)).refresh();
+        ((HospitalTankView) rootView.findViewById(R.id.hospitalBigView)).refresh();
+        ((SumpTankView) rootView.findViewById(R.id.sumpBigView)).refresh();
 //
 //        ((BoilerSensorView) rootView.findViewById(R.id.boilerSensorTankBottom)).setSensorData(ThermostatControllerData.Instance.boilerSensors(ThermostatControllerData.BOILER_SENSOR_BOTTOM));
 //        ((BoilerSensorView) rootView.findViewById(R.id.boilerSensorTankTop)).setSensorData(ThermostatControllerData.Instance.boilerSensors(ThermostatControllerData.BOILER_SENSOR_TOP));
@@ -325,7 +227,7 @@ public class FragmentBoiler extends ChaFragment {
 //        ((PumpView) rootView.findViewById(R.id.boilerFurnace)).setState(ThermostatControllerData.Instance.boilerPumps(ThermostatControllerData.BOILER_FURNACE).getState());
 //
 //        drawFooter();
-//    }
+    }
 
     private void drawFooter() {
         CardView cv = ((CardView) rootView.findViewById(R.id.boilerMode));

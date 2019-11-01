@@ -7,17 +7,19 @@
     android:orientation="vertical">
 
 
-    <ge.altasoft.gia.ag.views.BoilerSensorView
-        android:id="@+id/tankView"
+    <ge.altasoft.gia.ag.views.AquaTankView
+        android:id="@+id/aquaBigView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-
-    <ge.altasoft.gia.ag.views.BoilerSensorView
-        android:id="@+id/tankView2"
+    <ge.altasoft.gia.ag.views.HospitalTankView
+        android:id="@+id/hospitalBigView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-
+    <ge.altasoft.gia.ag.views.SumpTankView
+        android:id="@+id/sumpBigView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

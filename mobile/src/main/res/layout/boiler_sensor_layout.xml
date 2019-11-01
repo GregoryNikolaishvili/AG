@@ -16,24 +16,39 @@
         android:layout_gravity="top"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:background="@android:color/holo_blue_light" />
+        android:background="@color/red" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/caption"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/warning"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/cardview_light_background" />
+
+            <TextView
+                android:id="@+id/caption_text"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="-36dp"
+                android:gravity="bottom"
                 android:rotation="-90"
-                android:layout_marginLeft="30dp"
                 android:text="Aqua" />
-        </LinearLayout>
+
+
+
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/main_layout"
@@ -71,8 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:progress="25"
-                    android:progressDrawable="@drawable/redprogress"
-                    android:secondaryProgress="75" />
+                    android:progressDrawable="@drawable/redprogress" />
             </LinearLayout>
         </LinearLayout>
 
@@ -87,23 +101,36 @@
             android:layout_weight="25"
             android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="@android:color/holo_blue_light" />
-
-
             <LinearLayout
+                android:id="@+id/pump_layout_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/right_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20%"
+                    />
+            </LinearLayout>
+
+
+                <LinearLayout
+                android:id="@+id/pump_layout_middle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
+
+
                 <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/light_value"
+                    android:id="@+id/light1_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:background="@drawable/bulb_indicator_yellow" />
@@ -127,7 +154,7 @@
                     android:id="@+id/light3_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/bulb_indicator_violet" />
+                    android:background="@drawable/bulb_indicator_yellow" />
 
                 <View
                     android:layout_width="12dp"
@@ -182,7 +209,7 @@
                     android:id="@+id/o2_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/o2_indicator_on" />
+                    android:background="@drawable/o2_indicator_off" />
 
             </LinearLayout>
 
@@ -197,6 +224,6 @@
         android:layout_gravity="bottom"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:background="@android:color/holo_blue_light" />
+        android:background="@color/red" />
 
 </android.support.v7.widget.CardView>

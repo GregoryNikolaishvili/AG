@@ -28,67 +28,67 @@ public class AquaControllerData {
     public final static int SENSOR_COUNT = 17;
 
     // Device Ids
-    final static int DEVICE_LIGHT_1 = 0;
-    final static int DEVICE_LIGHT_2 = 1;
-    final static int DEVICE_LIGHT_3 = 2;
-    final static int DEVICE_LIGHT_4 = 3;
+    public final static int DEVICE_LIGHT_1 = 0;
+    public final static int DEVICE_LIGHT_2 = 1;
+    public final static int DEVICE_LIGHT_3 = 2;
+    public final static int DEVICE_LIGHT_4 = 3;
 
-    final static int DEVICE_LIGHT_5 = 4;
-    final static int DEVICE_UV_LIGHT = 5;
-    final static int DEVICE_AQUA_HEATER = 6;
-    final static int DEVICE_AQUA_RECIRCULATE_PUMP = 7;
+    public final static int DEVICE_LIGHT_5 = 4;
+    public final static int DEVICE_UV_LIGHT = 5;
+    public final static int DEVICE_AQUA_HEATER = 6;
+    public final static int DEVICE_AQUA_RECIRCULATE_PUMP = 7;
 
-    final static int DEVICE_FILTER_1 = 8;
-    final static int DEVICE_FILTER_2 = 9;
-    final static int DEVICE_O2 = 10;
-    final static int DEVICE_CO2 = 11;
+    public final static int DEVICE_FILTER_1 = 8;
+    public final static int DEVICE_FILTER_2 = 9;
+    public final static int DEVICE_O2 = 10;
+    public final static int DEVICE_CO2 = 11;
 
-    final static int DEVICE_FEEDER_1 = 12;
-    final static int DEVICE_FEEDER_2 = 13;
-    final static int DEVICE_WATER_DRAIN_PUMP = 14;
-    final static int DEVICE_WATER_FILL_PUMP = 15;
+    public final static int DEVICE_FEEDER_1 = 12;
+    public final static int DEVICE_FEEDER_2 = 13;
+    public final static int DEVICE_WATER_DRAIN_PUMP = 14;
+    public final static int DEVICE_WATER_FILL_PUMP = 15;
 
-    final static int DEVICE_SUMP_RECIRCULATE_PUMP = 16;
-    final static int DEVICE_SUMP_HEATER = 17;
-    final static int DEVICE_HOSPITAL_LIGHT = 18;
-    final static int DEVICE_HOSPITAL_HEATER = 19;
+    public final static int DEVICE_SUMP_RECIRCULATE_PUMP = 16;
+    public final static int DEVICE_SUMP_HEATER = 17;
+    public final static int DEVICE_HOSPITAL_LIGHT = 18;
+    public final static int DEVICE_HOSPITAL_HEATER = 19;
 
-    final static int DEVICE_SOLENOID = 20; // main water shutoff
-    final static int DEVICE_BOARD_FAN = 21;
-    final static int DEVICE_EXHAUST_FAN = 22;
-    final static int DEVICE_MAINTENANCE_MODE = 23;
+    public final static int DEVICE_SOLENOID = 20; // main water shutoff
+    public final static int DEVICE_BOARD_FAN = 21;
+    public final static int DEVICE_EXHAUST_FAN = 22;
+    public final static int DEVICE_MAINTENANCE_MODE = 23;
 
-    final static int DEVICE_DEVICE_220_A = 24;
-    final static int DEVICE_DEVICE_220_B = 25;
-    final static int DEVICE_DEVICE_220C = 26;
-    final static int DEVICE_BOARD_2_RELAY_FREE = 27;
+    public final static int DEVICE_DEVICE_220_A = 24;
+    public final static int DEVICE_DEVICE_220_B = 25;
+    public final static int DEVICE_DEVICE_220C = 26;
+    public final static int DEVICE_BOARD_2_RELAY_FREE = 27;
 
     final static int DEVICE_DOSING_PUMP_MACRO = 28;
     final static int DEVICE_DOSING_PUMP_MICRO = 29;
 
     // sensor IDs
-    final static int SENSOR_T_AQUARIUM_1 = 0;
-    final static int SENSOR_T_AQUARIUM_2 = 1;
-    final static int SENSOR_T_AQUARIUM_3 = 2;
-    final static int SENSOR_AQUA_WATER_HIGH = 3;
+    public final static int SENSOR_T_AQUARIUM_1 = 0;
+    public final static int SENSOR_T_AQUARIUM_2 = 1;
+    public final static int SENSOR_AQUA_WATER_HIGH = 3;
+    public final static int SENSOR_T_AQUARIUM_3 = 2;
 
-    final static int SENSOR_T_SUMP = 4;
-    final static int SENSOR_WL_SUMP = 5;
-    final static int SENSOR_WL_SUMP_MM = 6;
-    final static int SENSOR_SUMP_WATER_HIGH = 7;
-    final static int SENSOR_SUMP_WATER_LOW = 8;
+    public final static int SENSOR_T_SUMP = 4;
+    public final static int SENSOR_WL_SUMP = 5;
+    public final static int SENSOR_WL_SUMP_MM = 6;
+    public final static int SENSOR_SUMP_WATER_HIGH = 7;
+    public final static int SENSOR_SUMP_WATER_LOW = 8;
 
-    final static int SENSOR_T_HOSPITAL = 9;
-    final static int SENSOR_HOSPITAL_WATER_LOW = 10;
+    public final static int SENSOR_T_HOSPITAL = 9;
+    public final static int SENSOR_HOSPITAL_WATER_LOW = 10;
 
-    final static int SENSOR_T_ROOM = 11;
-    final static int SENSOR_H_ROOM = 12;
+    public final static int SENSOR_T_ROOM = 11;
+    public final static int SENSOR_H_ROOM = 12;
 
-    final static int SENSOR_T_BOARD = 13;
-    final static int SENSOR_RPM_BOARD_FAN = 14;
+    public final static int SENSOR_T_BOARD = 13;
+    public final static int SENSOR_RPM_BOARD_FAN = 14;
 
-    final static int SENSOR_WATER_IS_ON_FLOOR_1 = 15;
-    final static int SENSOR_WATER_IS_ON_FLOOR_2 = 16;
+    public final static int SENSOR_WATER_IS_ON_FLOOR_1 = 15;
+    public final static int SENSOR_WATER_IS_ON_FLOOR_2 = 16;
 
     ////////
 
@@ -325,7 +325,7 @@ public class AquaControllerData {
         switch (id) {
 
             case SENSOR_T_AQUARIUM_1:
-                return "Aaqua T1";
+                return "Aqua T1";
             case SENSOR_T_AQUARIUM_2:
                 return "Aqua T2";
             case SENSOR_T_AQUARIUM_3:
@@ -386,7 +386,7 @@ public class AquaControllerData {
             case SENSOR_RPM_BOARD_FAN:
                 w = new SensorView(context, fromDashboard);
                 break;
-                
+
             case SENSOR_AQUA_WATER_HIGH:
             case SENSOR_SUMP_WATER_HIGH:
             case SENSOR_SUMP_WATER_LOW:
