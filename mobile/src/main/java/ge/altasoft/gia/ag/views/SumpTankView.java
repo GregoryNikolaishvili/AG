@@ -34,6 +34,9 @@ public class SumpTankView extends ChaWidget {
     private View tvWarning;
     private TextView tvRightText;
 
+    private ImageView tvPumpDrain;
+    private ImageView tvPumpFill;
+
     public SumpTankView(Context context, boolean fromDashboard) {
         super(context, fromDashboard);
         initializeViews(context);
@@ -76,7 +79,7 @@ public class SumpTankView extends ChaWidget {
 
     private void initializeViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.boiler_sensor_layout, this);
+        inflater.inflate(R.layout.tank_view_layout, this);
 
         afterInflate();
 
@@ -101,12 +104,14 @@ public class SumpTankView extends ChaWidget {
 
         tvWarning = this.findViewById(R.id.warning);
 
+        tvPumpDrain = (ImageView) this.findViewById(R.id.top_pump_valuw);
+        tvPumpFill = (ImageView) this.findViewById(R.id.top_pump2_valuw);
+
         tvLight1.setBackgroundResource(R.drawable.none);
         tvLight2.setBackgroundResource(R.drawable.none);
         tvLight3.setBackgroundResource(R.drawable.none);
         tvLight4.setBackgroundResource(R.drawable.none);
 
-        tvFilter1.setBackgroundResource(R.drawable.none);
         tvFilter2.setBackgroundResource(R.drawable.none);
         tvOxygen.setBackgroundResource(R.drawable.none);
 
@@ -136,14 +141,29 @@ public class SumpTankView extends ChaWidget {
             allOk = false;
         tvRecircPump.setBackgroundResource(v > 0 ? R.drawable.pump_indicator_on : R.drawable.pump_indicator_off);
 
+        v = AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_WATER_IS_ON_FLOOR_1).getState();
+        tvFilter1.setBackgroundResource(v > 0 ? R.drawable.water_droplets_on : R.drawable.water_droplets_off);
+
+        v = AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_WATER_IS_ON_FLOOR_2).getState();
+        tvFilter2.setBackgroundResource(v > 0 ? R.drawable.water_droplets_on: R.drawable.water_droplets_off);
+
+        v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_SOLENOID).getState();
+        tvOxygen.setBackgroundResource(v > 0 ? R.drawable.water_indicator_on: R.drawable.water_indicator_off);
+
         v = AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_SUMP_WATER_HIGH).getState();
-        tvWaterOnTop.setBackgroundColor(v > 0 ? Color.CYAN : Color.TRANSPARENT);
+        tvWaterOnTop.setBackgroundColor(v > 0 ? Color.TRANSPARENT : Color.YELLOW);
 
         v = AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_SUMP_WATER_LOW).getState();
         tvWaterOnBottom.setBackgroundColor(v > 0 ? Color.CYAN : Color.TRANSPARENT);
 
         v = AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_WL_SUMP).getState();
         tvRightText.setText(v + " %");
+
+        v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_WATER_DRAIN_PUMP).getState();
+        tvPumpDrain.setBackgroundResource(v > 0 ? R.drawable.pump_indicator_on: R.drawable.pump_indicator_off);
+
+        v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_WATER_FILL_PUMP).getState();
+        tvPumpFill.setBackgroundResource(v > 0 ? R.drawable.pump_indicator_on: R.drawable.pump_indicator_off);
 
         v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_MAINTENANCE_MODE).getState();
         tvCaption.setBackgroundColor(v > 0 ? Color.YELLOW : Color.TRANSPARENT);

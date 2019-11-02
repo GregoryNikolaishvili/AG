@@ -170,6 +170,7 @@ public class MainActivity extends ChaActivity {
         drawControllerStatus(false, R.id.controllerIsOnlineDash);
         drawControllerStatus(false, R.id.controllerIsOnlineDevice);
         drawControllerStatus(false, R.id.controllerIsOnlineSensor);
+        drawControllerStatus(false, R.id.controllerIsOnlineTank);
     }
 
 
@@ -216,6 +217,7 @@ public class MainActivity extends ChaActivity {
 
         switch (dataType) {
             case WrtState:
+                drawWrtStatus(Utils.lastMqttConnectionWrtIsOnline, R.id.wrtIsOnlineTank);
                 drawWrtStatus(Utils.lastMqttConnectionWrtIsOnline, R.id.wrtIsOnlineDash);
                 drawWrtStatus(Utils.lastMqttConnectionWrtIsOnline, R.id.wrtIsOnlineDevice);
                 drawWrtStatus(Utils.lastMqttConnectionWrtIsOnline, R.id.wrtIsOnlineSensor);
@@ -230,6 +232,7 @@ public class MainActivity extends ChaActivity {
                         drawControllerStatus(value && AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineDash);
                         drawControllerStatus(value && AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineDash);
                         drawControllerStatus(value && AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineSensor);
+                        drawControllerStatus(value && AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineTank);
                         break;
                 }
                 break;
@@ -240,6 +243,7 @@ public class MainActivity extends ChaActivity {
                 drawControllerStatus(AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineDash);
                 drawControllerStatus(AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineDevice);
                 drawControllerStatus(AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineSensor);
+                drawControllerStatus(AquaControllerData.Instance.isAlive(), R.id.controllerIsOnlineTank);
                 break;
 
             case AquagodControllerState:
@@ -322,6 +326,7 @@ public class MainActivity extends ChaActivity {
             case AquagodSettings:
                 pagerAdapter.fragmentSensors.rebuildUI(false);
                 pagerAdapter.fragmentDashboard.rebuildUI(false);
+                pagerAdapter.fragmentTank.rebuildUI(false);
                 break;
         }
     }
@@ -380,9 +385,9 @@ public class MainActivity extends ChaActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return fragmentTank;
-                case 1:
                     return fragmentDashboard;
+                case 1:
+                    return fragmentTank;
                 case 2:
                     return fragmentDevices;
                 case 3:
@@ -400,9 +405,9 @@ public class MainActivity extends ChaActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Tank";
-                case 1:
                     return "Dashboard";
+                case 1:
+                    return "Tank";
                 case 2:
                     return "Devices";
                 case 3:

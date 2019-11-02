@@ -1,9 +1,7 @@
 package ge.altasoft.gia.ag.views;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,7 +75,7 @@ public class HospitalTankView extends ChaWidget {
 
     private void initializeViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.boiler_sensor_layout, this);
+        inflater.inflate(R.layout.tank_view_layout, this);
 
         afterInflate();
 

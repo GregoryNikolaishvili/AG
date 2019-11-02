@@ -1,27 +1,20 @@
 package ge.altasoft.gia.ag.views;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.Calendar;
 import java.util.Locale;
 
 import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.classes.ChaWidget;
-import ge.altasoft.gia.ag.classes.SensorData;
 import ge.altasoft.gia.ag.classes.WidgetType;
 import ge.altasoft.gia.ag.R;
-import ge.altasoft.gia.ag.Utils;
 
 public class AquaTankView extends ChaWidget {
 
@@ -82,7 +75,7 @@ public class AquaTankView extends ChaWidget {
 
     private void initializeViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.boiler_sensor_layout, this);
+        inflater.inflate(R.layout.tank_view_layout, this);
 
         afterInflate();
 

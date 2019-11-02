@@ -47,7 +47,6 @@
                 android:text="Aqua" />
 
 
-
         </FrameLayout>
 
         <LinearLayout
@@ -107,19 +106,39 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center_vertical"
-                android:visibility="gone"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/right_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:text="20%"
-                    />
+                    android:text="20%" />
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="0dp" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/top_pump_valuw"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/pump_indicator_on" />
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="0dp" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/top_pump2_valuw"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/pump_indicator_off" />
+
             </LinearLayout>
 
 
-                <LinearLayout
+            <LinearLayout
                 android:id="@+id/pump_layout_middle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,13 +147,11 @@
                 android:orientation="horizontal">
 
 
-
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/light1_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:background="@drawable/bulb_indicator_yellow" />
-
 
                 <View
                     android:layout_width="12dp"
