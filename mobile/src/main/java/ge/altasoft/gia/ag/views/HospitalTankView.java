@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import ge.altasoft.gia.ag.R;
+import ge.altasoft.gia.ag.Utils;
 import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.classes.ChaWidget;
 import ge.altasoft.gia.ag.classes.WidgetType;
@@ -114,19 +115,37 @@ public class HospitalTankView extends ChaWidget {
 
     @Override
     public void refresh() {
+        if (!AquaControllerData.Instance.haveData())
+            return;
+
         boolean allOk = true;
 
         float fv = AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_T_HOSPITAL).getState() / 10.0f;
-        if (fv < 24.5 && fv > 25.5)
-            allOk = false;
         tvTemperature.setText(String.format(Locale.US, "%.1f°", fv));
-//        tvTemperature.setTextColor(this.sensorData.getTemperatureColor());
+        if (fv > 25.5)
+        {
+            tvTemperature.setTextColor(Utils.COLOR_TEMP_HIGH);
+            allOk = false;
+        }
+        else
+        if (fv < 24.5)
+        {
+            tvTemperature.setTextColor(Utils.COLOR_TEMP_LOW);
+            allOk = false;
+        }
+        else
+        {
+            tvTemperature.setTextColor(Utils.COLOR_TEMP_NORMAL);
+        }
 
         int v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_HOSPITAL_HEATER).getState();
         tvHeater.setProgress(v);
 
         v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_HOSPITAL_LIGHT).getState();
         tvLight1.setBackgroundResource(v > 0 ? R.drawable.bulb_indicator_yellow : R.drawable.bulb_indicator_off);
+
+        v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_O2).getState();
+        tvOxygen.setBackgroundResource(v > 0 ? R.drawable.o2_indicator_on : R.drawable.o2_indicator_off);
 
         v = AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_HOSPITAL_WATER_LOW).getState();
         tvWaterOnBottom.setBackgroundColor(v > 0 ? Color.CYAN : Color.TRANSPARENT);

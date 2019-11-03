@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
+import ge.altasoft.gia.ag.Utils;
 import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.classes.ChaWidget;
 import ge.altasoft.gia.ag.classes.WidgetType;
@@ -100,19 +101,34 @@ public class AquaTankView extends ChaWidget {
 
         tvWaterOnBottom.setBackgroundColor(Color.TRANSPARENT);
 
-        ((TextView)this.findViewById(R.id.caption_text)).setText("Aqua");
+        ((TextView) this.findViewById(R.id.caption_text)).setText("Aqua");
     }
 
 
     @Override
     public void refresh() {
+        if (!AquaControllerData.Instance.haveData())
+            return;
+
         boolean allOk = true;
 
         float fv = (AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_T_AQUARIUM_1).getState() + AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_T_AQUARIUM_2).getState()) / 20.0f;
-        if (fv < 24.5 && fv > 25.5)
-            allOk = false;
         tvTemperature.setText(String.format(Locale.US, "%.1f°", fv));
-//        tvTemperature.setTextColor(this.sensorData.getTemperatureColor());
+        if (fv > 25.5)
+        {
+            tvTemperature.setTextColor(Utils.COLOR_TEMP_HIGH);
+            allOk = false;
+        }
+        else
+        if (fv < 24.5)
+        {
+            tvTemperature.setTextColor(Utils.COLOR_TEMP_LOW);
+            allOk = false;
+        }
+        else
+        {
+            tvTemperature.setTextColor(Utils.COLOR_TEMP_NORMAL);
+        }
 
 
         int v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_AQUA_HEATER).getState();

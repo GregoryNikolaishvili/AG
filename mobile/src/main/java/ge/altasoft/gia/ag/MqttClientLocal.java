@@ -345,6 +345,8 @@ public class MqttClientLocal {
 
                     //region Water level
                     case TOPIC_AQUAGOD_ALIVE:
+                        if (AquaControllerData.Instance != null)
+                            AquaControllerData.Instance.setHaveData();
                         broadcastDataIntent.putExtra(MQTT_DATA_TYPE, MQTTReceivedDataType.AquagodControllerAlive);
                         broadcastDataIntent.putExtra("BoardTimeInSec", Long.parseLong(payload, 16));
                         context.sendBroadcast(broadcastDataIntent);

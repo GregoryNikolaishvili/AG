@@ -16,7 +16,7 @@
         android:layout_gravity="top"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:background="@color/red" />
+        android:background="@color/transparent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/cardview_light_background" />
+                android:background="@color/transparent" />
 
             <TextView
                 android:id="@+id/caption_text"
@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@string/sample_temperature"
+                    android:text="- - - -"
                     android:textSize="@dimen/boiler_sensor_t_size" />
             </LinearLayout>
 
@@ -84,7 +84,7 @@
                     style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:progress="25"
+                    android:progress="0"
                     android:progressDrawable="@drawable/redprogress" />
             </LinearLayout>
         </LinearLayout>
@@ -120,20 +120,20 @@
                     android:layout_height="0dp" />
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/top_pump_valuw"
+                    android:id="@+id/top_pump_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/pump_indicator_on" />
+                    android:background="@drawable/drain_indicator_off" />
 
                 <View
                     android:layout_width="12dp"
                     android:layout_height="0dp" />
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/top_pump2_valuw"
+                    android:id="@+id/top_pump2_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/pump_indicator_off" />
+                    android:background="@drawable/fill_indicator_off" />
 
             </LinearLayout>
 
@@ -151,7 +151,7 @@
                     android:id="@+id/light1_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/bulb_indicator_yellow" />
+                    android:background="@drawable/bulb_indicator_off" />
 
                 <View
                     android:layout_width="12dp"
@@ -171,7 +171,7 @@
                     android:id="@+id/light3_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/bulb_indicator_yellow" />
+                    android:background="@drawable/bulb_indicator_off" />
 
                 <View
                     android:layout_width="12dp"
@@ -181,7 +181,7 @@
                     android:id="@+id/light4_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/bulb_indicator_violet" />
+                    android:background="@drawable/bulb_indicator_off" />
 
             </LinearLayout>
 
@@ -196,7 +196,7 @@
                     android:id="@+id/pump_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/pump_indicator_on" />
+                    android:background="@drawable/pump_indicator_off" />
 
                 <View
                     android:layout_width="12dp"
@@ -206,7 +206,7 @@
                     android:id="@+id/filter1_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/filter1_indicator_on" />
+                    android:background="@drawable/filter1_indicator_off" />
 
                 <View
                     android:layout_width="12dp"
@@ -216,7 +216,7 @@
                     android:id="@+id/filter2_value"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/filter1_indicator_on" />
+                    android:background="@drawable/filter1_indicator_off" />
 
                 <View
                     android:layout_width="12dp"
@@ -241,6 +241,6 @@
         android:layout_gravity="bottom"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:background="@color/red" />
+        android:background="@color/transparent" />
 
 </android.support.v7.widget.CardView>

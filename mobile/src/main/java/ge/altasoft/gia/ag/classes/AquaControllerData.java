@@ -96,6 +96,7 @@ public class AquaControllerData {
 
     private boolean isActive;
     private boolean haveSettings;
+    private boolean haveData;
     private long boardTimeInSec = 0;
 
     final private DeviceData[] deviceValues;
@@ -116,10 +117,15 @@ public class AquaControllerData {
 
         for (int i = 0; i < SENSOR_COUNT; i++)
             sensorValues[i] = new SensorData(i);
+
+        haveData = false;
     }
 
     public boolean haveSettings() {
         return haveSettings;
+    }
+    public boolean haveData() {
+        return haveData;
     }
 
     public boolean isAlive() {
@@ -174,6 +180,9 @@ public class AquaControllerData {
 
     private void setHaveSettings() {
         this.haveSettings = true;
+    }
+    public void setHaveData() {
+        this.haveData = true;
     }
 
 
@@ -429,7 +438,7 @@ public class AquaControllerData {
     }
 
     public void decodeSettings(String response) {
-        Log.d("decode relay settings", response);
+        Log.d("decode settings", response);
 
         setIsActive(response.charAt(0) != 'F');
 
