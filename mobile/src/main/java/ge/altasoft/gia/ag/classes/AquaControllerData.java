@@ -24,47 +24,44 @@ import ge.altasoft.gia.ag.views.YesNoView;
 
 public class AquaControllerData {
 
-    public final static int DEVICE_COUNT = 30;
-    public final static int SENSOR_COUNT = 17;
+    public final static int DEVICE_COUNT = 28;
+    public final static int SENSOR_COUNT = 18;
 
     // Device Ids
-    public final static int DEVICE_LIGHT_1 = 0;
-    public final static int DEVICE_LIGHT_2 = 1;
-    public final static int DEVICE_LIGHT_3 = 2;
-    public final static int DEVICE_LIGHT_4 = 3;
+    public final static int DEVICE_LIGHT_WHITE = 0;
+    public final static int DEVICE_LIGHT_BLUE = 1;
+    public final static int DEVICE_LIGHT_MOON = 2;
+    public final static int DEVICE_UV_LIGHT = 3;
+    public final static int DEVICE_AQUA_HEATER = 4;
+    public final static int DEVICE_AQUA_RECIRCULATE_PUMP = 5;
 
-    public final static int DEVICE_LIGHT_5 = 4;
-    public final static int DEVICE_UV_LIGHT = 5;
-    public final static int DEVICE_AQUA_HEATER = 6;
-    public final static int DEVICE_AQUA_RECIRCULATE_PUMP = 7;
+    public final static int DEVICE_FILTER_1 = 6;
+    public final static int DEVICE_FILTER_2 = 7;
+    public final static int DEVICE_O2 = 8;
+    public final static int DEVICE_CO2 = 9;
 
-    public final static int DEVICE_FILTER_1 = 8;
-    public final static int DEVICE_FILTER_2 = 9;
-    public final static int DEVICE_O2 = 10;
-    public final static int DEVICE_CO2 = 11;
+    public final static int DEVICE_FEEDER_1 = 10;
+    public final static int DEVICE_FEEDER_2 = 11;
+    public final static int DEVICE_WATER_DRAIN_PUMP = 12;
+    public final static int DEVICE_WATER_FILL_PUMP = 13;
 
-    public final static int DEVICE_FEEDER_1 = 12;
-    public final static int DEVICE_FEEDER_2 = 13;
-    public final static int DEVICE_WATER_DRAIN_PUMP = 14;
-    public final static int DEVICE_WATER_FILL_PUMP = 15;
+    public final static int DEVICE_SUMP_RECIRCULATE_PUMP = 14;
+    public final static int DEVICE_SUMP_HEATER = 15;
+    public final static int DEVICE_HOSPITAL_LIGHT = 16;
+    public final static int DEVICE_HOSPITAL_HEATER = 17;
 
-    public final static int DEVICE_SUMP_RECIRCULATE_PUMP = 16;
-    public final static int DEVICE_SUMP_HEATER = 17;
-    public final static int DEVICE_HOSPITAL_LIGHT = 18;
-    public final static int DEVICE_HOSPITAL_HEATER = 19;
+    public final static int DEVICE_SOLENOID = 18; // main water shutoff
+    public final static int DEVICE_BOARD_FAN = 19;
+    public final static int DEVICE_EXHAUST_FAN = 20;
+    public final static int DEVICE_MAINTENANCE_MODE = 21;
 
-    public final static int DEVICE_SOLENOID = 20; // main water shutoff
-    public final static int DEVICE_BOARD_FAN = 21;
-    public final static int DEVICE_EXHAUST_FAN = 22;
-    public final static int DEVICE_MAINTENANCE_MODE = 23;
+    public final static int DEVICE_DEVICE_220_A = 22;
+    public final static int DEVICE_DEVICE_220_B = 23;
+    public final static int DEVICE_DEVICE_220C = 24;
+    public final static int DEVICE_BOARD_2_RELAY_FREE = 25;
 
-    public final static int DEVICE_DEVICE_220_A = 24;
-    public final static int DEVICE_DEVICE_220_B = 25;
-    public final static int DEVICE_DEVICE_220C = 26;
-    public final static int DEVICE_BOARD_2_RELAY_FREE = 27;
-
-    final static int DEVICE_DOSING_PUMP_MACRO = 28;
-    final static int DEVICE_DOSING_PUMP_MICRO = 29;
+    final static int DEVICE_DOSING_PUMP_MACRO = 26;
+    final static int DEVICE_DOSING_PUMP_MICRO = 27;
 
     // sensor IDs
     public final static int SENSOR_T_AQUARIUM_1 = 0;
@@ -89,6 +86,7 @@ public class AquaControllerData {
 
     public final static int SENSOR_WATER_IS_ON_FLOOR_1 = 15;
     public final static int SENSOR_WATER_IS_ON_FLOOR_2 = 16;
+    public final static int SENSOR_WATER_CHANGE_STATE = 17;
 
     ////////
 
@@ -367,6 +365,8 @@ public class AquaControllerData {
                 return "Water is on floor 1";
             case SENSOR_WATER_IS_ON_FLOOR_2:
                 return "Water is on floor 2";
+            case SENSOR_WATER_CHANGE_STATE:
+                return "Water change state";
             default:
                 return "Sensor #" + id;
         }
@@ -404,6 +404,7 @@ public class AquaControllerData {
             case SENSOR_WATER_IS_ON_FLOOR_2:
                 w = new YesNoView(context, fromDashboard);
                 break;
+
             default:
                 w = new SensorView(context, fromDashboard);
         }
