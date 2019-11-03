@@ -353,8 +353,7 @@ public class MqttClientLocal {
                         return;
 
                     case TOPIC_AQUAGOD_SETTINGS:
-                        //AquaControllerData.Instance.decodeWaterLevelSettings(payload);
-
+                        AquaControllerData.Instance.decodeSettings(payload);
                         broadcastDataIntent.putExtra(MQTT_DATA_TYPE, MQTTReceivedDataType.AquagodSettings);
                         context.sendBroadcast(broadcastDataIntent);
                         return;

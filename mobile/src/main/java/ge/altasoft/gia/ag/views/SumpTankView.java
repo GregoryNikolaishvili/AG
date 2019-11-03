@@ -129,15 +129,17 @@ public class SumpTankView extends ChaWidget {
 
         boolean allOk = true;
 
+        float presetT = AquaControllerData.Instance.getSettings().aquariumTemperature / 10.0f;
+
         float fv = AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_T_SUMP).getState() / 10.0f;
         tvTemperature.setText(String.format(Locale.US, "%.1f°", fv));
-        if (fv > 25.5)
+        if (fv > presetT + 0.5f)
         {
             tvTemperature.setTextColor(Utils.COLOR_TEMP_HIGH);
             //allOk = false;
         }
         else
-        if (fv < 24.5)
+        if (fv < presetT - 0.5f)
         {
             tvTemperature.setTextColor(Utils.COLOR_TEMP_LOW);
             //allOk = false;

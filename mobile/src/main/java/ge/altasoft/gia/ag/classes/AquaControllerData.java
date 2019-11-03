@@ -22,6 +22,8 @@ import ge.altasoft.gia.ag.views.TemperatureView;
 import ge.altasoft.gia.ag.views.WaterView;
 import ge.altasoft.gia.ag.views.YesNoView;
 
+;
+
 public class AquaControllerData {
 
     public final static int DEVICE_COUNT = 28;
@@ -92,6 +94,8 @@ public class AquaControllerData {
 
     final public static AquaControllerData Instance = new AquaControllerData();
 
+    private AquagodSettings settings = new AquagodSettings();
+
     private boolean isActive;
     private boolean haveSettings;
     private boolean haveData;
@@ -119,9 +123,14 @@ public class AquaControllerData {
         haveData = false;
     }
 
+    public AquagodSettings getSettings() {
+        return settings;
+    }
+
     public boolean haveSettings() {
         return haveSettings;
     }
+
     public boolean haveData() {
         return haveData;
     }
@@ -179,6 +188,7 @@ public class AquaControllerData {
     private void setHaveSettings() {
         this.haveSettings = true;
     }
+
     public void setHaveData() {
         this.haveData = true;
     }
@@ -210,16 +220,12 @@ public class AquaControllerData {
 
     public static String getDeviceName(int id) {
         switch (id) {
-            case DEVICE_LIGHT_1:
-                return "Aqua 1";
-            case DEVICE_LIGHT_2:
-                return "Aqua 2";
-            case DEVICE_LIGHT_3:
-                return "Aqua 3";
-            case DEVICE_LIGHT_4:
-                return "Aqua 4";
-            case DEVICE_LIGHT_5:
-                return "Aqua 5";
+            case DEVICE_LIGHT_WHITE:
+                return "Aqua White";
+            case DEVICE_LIGHT_BLUE:
+                return "Aqua Blue";
+            case DEVICE_LIGHT_MOON:
+                return "Aqua Moon";
             case DEVICE_EXHAUST_FAN:
                 return "Exhaust fan";
             case DEVICE_FEEDER_1:
@@ -281,11 +287,9 @@ public class AquaControllerData {
         DeviceView w;
 
         switch (position) {
-            case DEVICE_LIGHT_1:
-            case DEVICE_LIGHT_2:
-            case DEVICE_LIGHT_3:
-            case DEVICE_LIGHT_4:
-            case DEVICE_LIGHT_5:
+            case DEVICE_LIGHT_WHITE:
+            case DEVICE_LIGHT_BLUE:
+            case DEVICE_LIGHT_MOON:
             case DEVICE_HOSPITAL_LIGHT:
             case DEVICE_UV_LIGHT:
                 w = new LightView(context, fromDashboard);
@@ -440,12 +444,49 @@ public class AquaControllerData {
 
     public void decodeSettings(String response) {
         Log.d("decode settings", response);
-
-        setIsActive(response.charAt(0) != 'F');
-
-        int idx = 1;
-        for (int i = 0; i < deviceValues.length; i++)
-            idx = deviceValues[i].decodeSettings(response, idx);
+        int idx = 0;
+        settings.version = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.aquariumTemperature = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.hospitalTemperature = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.boardTempMax = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.lightWhiteOnTime= Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.lightWhiteOffTime= Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.lightBlueOnTime = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.lightBlueOffTime = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.lightMoonOnTime = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.lightMoonOffTime = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.feed1StartTime = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.feed2StartTime = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.feed3StartTime = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.feedDuration = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.feedDOW = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.waterChangeStartTime = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.waterDrainDurationSec = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.waterFillDurationSec = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.waterDrainDuration2Sec = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.waterDrainLevel = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
+        settings.waterChangeDOW = Integer.parseInt(response.substring(idx, idx + 4), 16);
+        idx += 4;
 
         setHaveSettings();
     }

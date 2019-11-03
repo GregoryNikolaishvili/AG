@@ -105,6 +105,17 @@ public class AquaTankView extends ChaWidget {
     }
 
 
+    int T_UNDEFINED = 9999;
+
+    private int getAquariumTemperatureMean(int t1, int t2) {
+        if ((t1 != T_UNDEFINED) && (t1 != T_UNDEFINED))
+            return (t1 + t2) / 2;
+        if (t2 != T_UNDEFINED)
+            return t2;
+        else
+            return t1;
+    }
+
     @Override
     public void refresh() {
         if (!AquaControllerData.Instance.haveData())
@@ -112,21 +123,17 @@ public class AquaTankView extends ChaWidget {
 
         boolean allOk = true;
 
-        float fv = (AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_T_AQUARIUM_1).getState() + AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_T_AQUARIUM_2).getState()) / 20.0f;
+        float presetT = AquaControllerData.Instance.getSettings().aquariumTemperature / 10.0f;
+
+        float fv = getAquariumTemperatureMean(AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_T_AQUARIUM_1).getState(), AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_T_AQUARIUM_2).getState()) / 10.0f;
         tvTemperature.setText(String.format(Locale.US, "%.1f°", fv));
-        if (fv > 25.5)
-        {
+        if (fv > presetT + 0.5f) {
             tvTemperature.setTextColor(Utils.COLOR_TEMP_HIGH);
             allOk = false;
-        }
-        else
-        if (fv < 24.5)
-        {
+        } else if (fv < presetT - 0.5f) {
             tvTemperature.setTextColor(Utils.COLOR_TEMP_LOW);
             allOk = false;
-        }
-        else
-        {
+        } else {
             tvTemperature.setTextColor(Utils.COLOR_TEMP_NORMAL);
         }
 
@@ -134,13 +141,13 @@ public class AquaTankView extends ChaWidget {
         int v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_AQUA_HEATER).getState();
         tvHeater.setProgress(v);
 
-        v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_LIGHT_1).getState();
+        v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_LIGHT_WHITE).getState();
         tvLight1.setBackgroundResource(v > 0 ? R.drawable.bulb_indicator_yellow : R.drawable.bulb_indicator_off);
 
-        v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_LIGHT_2).getState();
+        v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_LIGHT_BLUE).getState();
         tvLight2.setBackgroundResource(v > 0 ? R.drawable.bulb_indicator_yellow : R.drawable.bulb_indicator_off);
 
-        v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_LIGHT_3).getState();
+        v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_LIGHT_MOON).getState();
         tvLight3.setBackgroundResource(v > 0 ? R.drawable.bulb_indicator_yellow : R.drawable.bulb_indicator_off);
 
         v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_UV_LIGHT).getState();

@@ -311,22 +311,23 @@ public class MainActivity extends ChaActivity {
 
             case AquagodDeviceState:
                 id = intent.getIntExtra("id", -1);
+                pagerAdapter.fragmentTank.rebuildUI(false);
                 pagerAdapter.fragmentDevices.drawState(id);
                 pagerAdapter.fragmentDashboard.drawWidgetState(WidgetType.Device, id);
-                pagerAdapter.fragmentTank.rebuildUI(false);
                 break;
 
             case AquagodSensorState:
                 id = intent.getIntExtra("id", -1);
+                pagerAdapter.fragmentTank.rebuildUI(false);
                 pagerAdapter.fragmentSensors.drawState(id);
                 pagerAdapter.fragmentDashboard.drawWidgetState(WidgetType.Sensor, id);
-                pagerAdapter.fragmentTank.rebuildUI(false);
                 break;
 
             case AquagodSettings:
-                pagerAdapter.fragmentSensors.rebuildUI(false);
-                pagerAdapter.fragmentDashboard.rebuildUI(false);
                 pagerAdapter.fragmentTank.rebuildUI(false);
+                pagerAdapter.fragmentDashboard.rebuildUI(false);
+                pagerAdapter.fragmentDevices.rebuildUI(false);
+                pagerAdapter.fragmentSensors.rebuildUI(false);
                 break;
         }
     }

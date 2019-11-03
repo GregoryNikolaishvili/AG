@@ -38,8 +38,8 @@ public class FragmentSensors extends ChaFragment implements OnStartDragListener 
     public void rebuildUI(boolean isStart) {
         if (rootView == null)
             return;
-//        if (!AquaControllerData.Instance.haveSettings())
-//            return;
+        if (!AquaControllerData.Instance.haveSettings())
+            return;
 
         hideWaitingScreen();
 

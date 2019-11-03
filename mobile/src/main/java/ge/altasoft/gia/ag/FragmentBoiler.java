@@ -111,15 +111,10 @@ public class FragmentBoiler extends ChaFragment {
             return;
         if (AquaControllerData.Instance == null)
             return;
-//        if (!AquaControllerData.Instance.haveSettings())
-//            return;
+        if (!AquaControllerData.Instance.haveSettings())
+            return;
 
         hideWaitingScreen();
-
-//        ((PumpView) rootView.findViewById(R.id.boilerPumpSolarPanel)).setRelayId(ThermostatControllerData.BOILER_SOLAR_PUMP);
-//        ((PumpView) rootView.findViewById(R.id.boilerPumpHeating)).setRelayId(ThermostatControllerData.BOILER_HEATING_PUMP);
-//
-//        ((BoilerFurnaceView) rootView.findViewById(R.id.boilerFurnace)).setRelayId(ThermostatControllerData.BOILER_FURNACE);
 
         drawSensorAndRelayStates();
     }

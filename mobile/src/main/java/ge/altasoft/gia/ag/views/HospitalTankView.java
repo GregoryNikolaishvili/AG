@@ -33,6 +33,7 @@ public class HospitalTankView extends ChaWidget {
     private View tvWaterOnTop;
     private View tvWaterOnBottom;
     private View tvWarning;
+    private TextView tvRightText;
 
     public HospitalTankView(Context context, boolean fromDashboard) {
         super(context, fromDashboard);
@@ -80,6 +81,8 @@ public class HospitalTankView extends ChaWidget {
 
         afterInflate();
 
+        tvRightText = (TextView) this.findViewById(R.id.right_text);
+
         tvTemperature = (TextView) this.findViewById(R.id.temperature_value);
         tvHeater = (ProgressBar) this.findViewById(R.id.heater_value);
 
@@ -100,14 +103,20 @@ public class HospitalTankView extends ChaWidget {
         tvWarning = this.findViewById(R.id.warning);
 
         tvWaterOnTop.setBackgroundColor(Color.TRANSPARENT);
+        tvLight1.setBackgroundResource(R.drawable.none);
         tvLight2.setBackgroundResource(R.drawable.none);
         tvLight3.setBackgroundResource(R.drawable.none);
         tvLight4.setBackgroundResource(R.drawable.none);
 
-        tvRecircPump.setBackgroundResource(R.drawable.none);
         tvFilter1.setBackgroundResource(R.drawable.none);
         tvFilter2.setBackgroundResource(R.drawable.none);
         tvOxygen.setBackgroundResource(R.drawable.none);
+
+        this.findViewById(R.id.top_pump_value).setBackgroundResource(R.drawable.none);
+        this.findViewById(R.id.top_pump2_value).setBackgroundResource(R.drawable.none);
+
+        this.findViewById(R.id.pump_layout_middle).setVisibility(GONE);
+        this.findViewById(R.id.pump_layout_top).setVisibility(VISIBLE);
 
         ((TextView) this.findViewById(R.id.caption_text)).setText("Hosp");
     }
@@ -120,29 +129,32 @@ public class HospitalTankView extends ChaWidget {
 
         boolean allOk = true;
 
+        float presetT = AquaControllerData.Instance.getSettings().hospitalTemperature / 10.0f;
+
         float fv = AquaControllerData.Instance.getSensorValue(AquaControllerData.SENSOR_T_HOSPITAL).getState() / 10.0f;
         tvTemperature.setText(String.format(Locale.US, "%.1f°", fv));
-        if (fv > 25.5)
-        {
-            tvTemperature.setTextColor(Utils.COLOR_TEMP_HIGH);
-            allOk = false;
-        }
-        else
-        if (fv < 24.5)
-        {
-            tvTemperature.setTextColor(Utils.COLOR_TEMP_LOW);
-            allOk = false;
-        }
-        else
-        {
+        if (presetT <= 0) {
             tvTemperature.setTextColor(Utils.COLOR_TEMP_NORMAL);
+        } else {
+            if (fv > presetT + 0.5f) {
+                tvTemperature.setTextColor(Utils.COLOR_TEMP_HIGH);
+                allOk = false;
+            } else if (fv < presetT - 0.5f) {
+                tvTemperature.setTextColor(Utils.COLOR_TEMP_LOW);
+                allOk = false;
+            } else {
+                tvTemperature.setTextColor(Utils.COLOR_TEMP_NORMAL);
+            }
         }
+
 
         int v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_HOSPITAL_HEATER).getState();
         tvHeater.setProgress(v);
 
+        tvRightText.setText(presetT <= 0 ? "Inactive" : String.format(Locale.US, "%.1f°", presetT));
+
         v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_HOSPITAL_LIGHT).getState();
-        tvLight1.setBackgroundResource(v > 0 ? R.drawable.bulb_indicator_yellow : R.drawable.bulb_indicator_off);
+        tvRecircPump.setBackgroundResource(v > 0 ? R.drawable.bulb_indicator_yellow : R.drawable.bulb_indicator_off);
 
         v = AquaControllerData.Instance.getDeviceValue(AquaControllerData.DEVICE_O2).getState();
         tvOxygen.setBackgroundResource(v > 0 ? R.drawable.o2_indicator_on : R.drawable.o2_indicator_off);
