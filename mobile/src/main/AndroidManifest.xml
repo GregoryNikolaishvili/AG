@@ -38,20 +38,13 @@
         <activity
             android:name=".light.LightSettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".thermostat.ThermostatSettingsActivity"
-            android:label="@string/title_activity_settings" />
 
         <activity
             android:name=".other.WaterLevelSettingsActivity"
             android:label="@string/title_activity_settings" />
 
-        <activity android:name=".LogActivity2" />
-        <activity android:name=".LogActivityTH2" />
-
         <activity android:name=".LogStateActivity" />
         <activity android:name=".WhoIsOnlineActivity" />
-        <activity android:name=".thermostat.BoilerChartActivity2" />
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
 

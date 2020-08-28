@@ -1,9 +1,9 @@
 package ge.altasoft.gia.ag;
 
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,9 +21,9 @@ import ge.altasoft.gia.ag.views.HospitalTankView;
 import ge.altasoft.gia.ag.views.SumpTankView;
 
 
-public class FragmentBoiler extends ChaFragment {
+public class FragmentTank extends ChaFragment {
 
-    public FragmentBoiler() {
+    public FragmentTank() {
     }
 
     @Override
@@ -33,7 +33,7 @@ public class FragmentBoiler extends ChaFragment {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_boiler;
+        return R.layout.fragment_tank;
     }
 
     @Override

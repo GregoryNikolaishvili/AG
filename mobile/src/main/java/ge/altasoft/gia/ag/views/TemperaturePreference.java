@@ -1,7 +1,7 @@
 package ge.altasoft.gia.ag.views;
 
 import android.content.Context;
-import android.support.annotation.Keep;
+import androidx.annotation.Keep;
 import android.text.InputType;
 import android.util.AttributeSet;
 

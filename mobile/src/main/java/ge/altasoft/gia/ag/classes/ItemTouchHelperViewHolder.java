@@ -16,7 +16,7 @@
 
 package ge.altasoft.gia.ag.classes;
 
-import android.support.v7.widget.helper.ItemTouchHelper;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
 /**
  * Interface to notify an item ViewHolder of relevant callbacks from {@link

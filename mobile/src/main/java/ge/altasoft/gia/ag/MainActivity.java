@@ -9,11 +9,11 @@ import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -366,7 +366,7 @@ public class MainActivity extends ChaActivity {
 
         final private boolean isLandscape;
 
-        FragmentBoiler fragmentTank = null;
+        FragmentTank fragmentTank = null;
         FragmentDashboard fragmentDashboard = null;
         FragmentDevices fragmentDevices = null;
         FragmentSensors fragmentSensors = null;
@@ -376,7 +376,7 @@ public class MainActivity extends ChaActivity {
 
             this.isLandscape = isLandscape;
 
-            fragmentTank = new FragmentBoiler();
+            fragmentTank = new FragmentTank();
             fragmentDashboard = new FragmentDashboard();
             fragmentDevices = new FragmentDevices();
             fragmentSensors = new FragmentSensors();

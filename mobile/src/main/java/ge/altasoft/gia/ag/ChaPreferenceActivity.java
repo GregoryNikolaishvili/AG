@@ -8,9 +8,9 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.IBinder;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public abstract class ChaPreferenceActivity extends AppCompatActivity {
 

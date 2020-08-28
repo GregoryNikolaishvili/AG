@@ -3,21 +3,20 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         release {
-            keyAlias '{dd6a115a-1f4c-4d2e-a187-f2170ffe6e4e}'
-            keyPassword 'Rangda02@'
-            storeFile file('D:/GitProjects/AG/GiaTmp.pfx')
-            storePassword 'Rangda02@'
+            keyAlias 'key0'
+            keyPassword 'batobato'
+            storeFile file('C:\\GitProjects\\CHA2\\keys.jks')
+            storePassword 'batobato'
         }
     }
-    compileSdkVersion 24
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 29
     defaultConfig {
         applicationId "ge.altasoft.gia.ag"
-        minSdkVersion 15
-        targetSdkVersion 24
+        minSdkVersion 22
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         signingConfig signingConfigs.release
     }
     buildTypes {
@@ -42,13 +41,9 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:24.2.1'
-    implementation 'com.android.support:design:24.2.1'
-    implementation 'com.android.support:cardview-v7:24.2.1'
-    //    compile 'com.android.support:percent:24.2.1'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
-
-    implementation files('libs/achartengine-1.2.0.jar')
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

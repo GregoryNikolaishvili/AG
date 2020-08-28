@@ -1,11 +1,8 @@
 package ge.altasoft.gia.ag.classes;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Date;
-import java.util.Locale;
-
-import ge.altasoft.gia.ag.Utils;
 
 public class DeviceData implements Comparable<DeviceData> {
 

@@ -3,7 +3,7 @@ package ge.altasoft.gia.ag;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,7 +21,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import ge.altasoft.gia.ag.classes.DeviceData;
 import ge.altasoft.gia.ag.classes.LogOneValueItem;
 import ge.altasoft.gia.ag.classes.WidgetType;
 

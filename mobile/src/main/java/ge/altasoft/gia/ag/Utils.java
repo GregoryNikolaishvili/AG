@@ -14,7 +14,7 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Debug;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Calendar;
 import java.util.Locale;

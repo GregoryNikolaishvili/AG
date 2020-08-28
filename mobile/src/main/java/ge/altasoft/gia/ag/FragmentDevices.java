@@ -1,6 +1,6 @@
 package ge.altasoft.gia.ag;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import ge.altasoft.gia.ag.classes.AquaControllerData;
 import ge.altasoft.gia.ag.classes.ChaFragment;
 import ge.altasoft.gia.ag.classes.ChaWidget;
