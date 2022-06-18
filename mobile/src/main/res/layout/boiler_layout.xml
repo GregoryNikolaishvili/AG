@@ -4,22 +4,23 @@
     android:id="@+id/boilerLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/Black"
     android:orientation="vertical">
 
 
     <ge.altasoft.gia.ag.views.AquaTankView
         android:id="@+id/aquaBigView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <ge.altasoft.gia.ag.views.HospitalTankView
         android:id="@+id/hospitalBigView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <ge.altasoft.gia.ag.views.SumpTankView
         android:id="@+id/sumpBigView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

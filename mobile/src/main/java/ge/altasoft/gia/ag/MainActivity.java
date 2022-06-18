@@ -10,10 +10,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -36,8 +40,8 @@ public class MainActivity extends ChaActivity {
 
         @Override
         public void run() {
-            for (int i = 0; i < pagerAdapter.getCount(); i++)
-                ((ChaFragment) pagerAdapter.getItem(i)).refreshWidgets();
+            for (int i = 0; i < pagerAdapter.getItemCount(); i++)
+                ((ChaFragment) pagerAdapter.createFragment(i)).refreshWidgets();
 
             timerHandler.postDelayed(this, 60000);
         }
@@ -58,10 +62,10 @@ public class MainActivity extends ChaActivity {
         setSupportActionBar(toolbar);
         //getSupportActionBar().setTitle("Country House Automation");
 
-        pagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), Utils.isTablet(this));
+        pagerAdapter = new SectionsPagerAdapter(this, Utils.isTablet(this));
 
         // Set up the ViewPager with the sections adapter.
-        ViewPager viewPager = (ViewPager) findViewById(R.id.container);
+        ViewPager2 viewPager = (ViewPager2) findViewById(R.id.container);
         viewPager.setOffscreenPageLimit(5);
         viewPager.setAdapter(pagerAdapter);
 
@@ -93,13 +97,13 @@ public class MainActivity extends ChaActivity {
                 for (int I = 2; I < this.mainMenu.size(); I++)
                     this.mainMenu.getItem(I).setEnabled(true);
 
-                for (int i = 0; i < pagerAdapter.getCount(); i++)
-                    ((ChaFragment) pagerAdapter.getItem(i)).setDraggableViews(false);
+                for (int i = 0; i < pagerAdapter.getItemCount(); i++)
+                    ((ChaFragment) pagerAdapter.createFragment(i)).setDraggableViews(false);
 
 
                 if (id == R.id.action_ok) {
-                    for (int i = 0; i < pagerAdapter.getCount(); i++)
-                        ((ChaFragment) pagerAdapter.getItem(i)).saveWidgetOrders();
+                    for (int i = 0; i < pagerAdapter.getItemCount(); i++)
+                        ((ChaFragment) pagerAdapter.createFragment(i)).saveWidgetOrders();
                 } else
                     rebuildUI(false);
 
@@ -113,8 +117,8 @@ public class MainActivity extends ChaActivity {
                 for (int I = 2; I < this.mainMenu.size(); I++)
                     this.mainMenu.getItem(I).setEnabled(false);
 
-                for (int i = 0; i < pagerAdapter.getCount(); i++)
-                    ((ChaFragment) pagerAdapter.getItem(i)).setDraggableViews(true);
+                for (int i = 0; i < pagerAdapter.getItemCount(); i++)
+                    ((ChaFragment) pagerAdapter.createFragment(i)).setDraggableViews(true);
 
                 return true;
 
@@ -202,8 +206,8 @@ public class MainActivity extends ChaActivity {
     }
 
     private void rebuildUI(boolean isStart) {
-        for (int i = 0; i < pagerAdapter.getCount(); i++)
-            ((ChaFragment) pagerAdapter.getItem(i)).rebuildUI(isStart);
+        for (int i = 0; i < pagerAdapter.getItemCount(); i++)
+            ((ChaFragment) pagerAdapter.createFragment(i)).rebuildUI(isStart);
     }
 
     @Override
@@ -362,7 +366,7 @@ public class MainActivity extends ChaActivity {
         Toast.makeText(this, sb.toString(), Toast.LENGTH_SHORT).show();
     }
 
-    private static class SectionsPagerAdapter extends FragmentPagerAdapter {
+    private static class SectionsPagerAdapter extends FragmentStateAdapter {
 
         final private boolean isLandscape;
 
@@ -371,7 +375,7 @@ public class MainActivity extends ChaActivity {
         FragmentDevices fragmentDevices = null;
         FragmentSensors fragmentSensors = null;
 
-        SectionsPagerAdapter(FragmentManager fm, boolean isLandscape) {
+        SectionsPagerAdapter(FragmentActivity fm, boolean isLandscape) {
             super(fm);
 
             this.isLandscape = isLandscape;
@@ -383,7 +387,7 @@ public class MainActivity extends ChaActivity {
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public Fragment createFragment(int position) {
             switch (position) {
                 case 0:
                     return fragmentDashboard;
@@ -398,28 +402,28 @@ public class MainActivity extends ChaActivity {
         }
 
         @Override
-        public int getCount() {
+        public int getItemCount() {
             return 4;
         }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "Dashboard";
-                case 1:
-                    return "Tank";
-                case 2:
-                    return "Devices";
-                case 3:
-                    return "Sensors";
-            }
-            return null;
-        }
-
-        @Override
-        public float getPageWidth(int position) {
-            return (isLandscape ? 0.5f : 1.0f);
-        }
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//            switch (position) {
+//                case 0:
+//                    return "Dashboard";
+//                case 1:
+//                    return "Tank";
+//                case 2:
+//                    return "Devices";
+//                case 3:
+//                    return "Sensors";
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        public float getPageWidth(int position) {
+//            return (isLandscape ? 0.5f : 1.0f);
+//        }
     }
 }

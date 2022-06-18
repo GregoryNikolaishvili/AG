@@ -21,20 +21,20 @@
             android:id="@+id/wrtIsOnlineDash"
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:paddingEnd="4dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
             android:paddingStart="4dp"
+            android:paddingLeft="4dp"
+            android:paddingEnd="4dp"
+            android:paddingRight="4dp"
             android:src="@drawable/wifi_off" />
 
         <ImageView
             android:id="@+id/controllerIsOnlineDash"
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:paddingEnd="4dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
             android:paddingStart="4dp"
+            android:paddingLeft="4dp"
+            android:paddingEnd="4dp"
+            android:paddingRight="4dp"
             android:src="@drawable/circle_red" />
 
         <TextView
@@ -42,11 +42,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:paddingEnd="4dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
             android:paddingStart="4dp"
-            android:textSize="@dimen/dashboard_error_text_size"
-            android:textColor="@android:color/holo_red_dark" />
+            android:paddingLeft="4dp"
+            android:paddingEnd="4dp"
+            android:paddingRight="4dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/dashboard_error_text_size" />
     </LinearLayout>
 </LinearLayout>
